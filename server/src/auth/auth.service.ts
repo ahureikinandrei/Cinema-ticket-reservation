@@ -9,6 +9,7 @@ import * as bcrypt from 'bcryptjs';
 import { CreateUserDto } from '../users/dto/create-user.dto';
 import { UsersService } from '../users/users.service';
 import { UserDocument } from '../users/schemas/user.schema';
+import { AuthUserDto } from './dto/auth.dto';
 
 @Injectable()
 export class AuthService {
@@ -16,6 +17,11 @@ export class AuthService {
     private userService: UsersService,
     private jwtService: JwtService,
   ) {}
+
+  async refresh(authDto: AuthUserDto) {
+    const user = this.jwtService.verify(authDto.token);
+    return this.generateToken(user);
+  }
 
   async login(userDto: CreateUserDto) {
     const user = await this.validateUser(userDto);
@@ -45,19 +51,29 @@ export class AuthService {
       role: user.role,
     };
     return {
+      user: payload,
       token: this.jwtService.sign(payload),
     };
   }
 
   private async validateUser(userDto: CreateUserDto) {
     const user = await this.userService.getUserByEmail(userDto.email);
+
+    if (!user) {
+      throw new UnauthorizedException({
+        message: 'Invalid email or password',
+      });
+    }
+
     const passwordEquals = await bcrypt.compare(
       userDto.password,
       user.password,
     );
-    if (user && passwordEquals) {
+
+    if (passwordEquals) {
       return user;
     }
+
     throw new UnauthorizedException({
       message: 'Invalid email or password',
     });

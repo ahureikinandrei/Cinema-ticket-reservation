@@ -12,11 +12,11 @@ export class UsersService {
 
   async createUser(dto: CreateUserDto) {
     const newUser = new this.userModel(dto);
-    return newUser.save();
+    return await newUser.save();
   }
 
   async getAllUsers() {
-    return this.userModel.find().exec();
+    return await this.userModel.find().exec();
   }
 
   async getUserByEmail(email: string) {

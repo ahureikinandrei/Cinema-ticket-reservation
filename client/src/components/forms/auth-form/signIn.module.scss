@@ -1,0 +1,12 @@
+.form_group {
+  margin-top: 6px;
+}
+
+.span {
+  color: #fd001e;
+  margin-left: 4px;
+  &:hover,
+  &:focus {
+    cursor: pointer;
+  }
+}

@@ -6,10 +6,12 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { signInValidationSchema } from './validationSchems';
-import style from './signIn.module.scss';
+import { useAction } from '../../../hooks/redux';
+import AuthService from '../../../services/auth.service';
+import LocalStorageService from '../../../services/localStorage.service';
 import { FormTypes, FormTypesEnum } from '../../buttons/auth-button/types';
-import { useSignInForm } from '../../../hooks/useSignInForm';
-import { UserData } from '../../../redux/actions/types';
+import { UNEXPECTED_ERROR } from '../../../constants/messages';
+import style from './signIn.module.scss';
 
 interface IAuthFormProps {
     closeModal: () => void;
@@ -30,11 +32,25 @@ const SingInForm: FC<IAuthFormProps> = ({ closeModal, changeFormType }) => {
         resolver: yupResolver(signInValidationSchema),
     });
 
-    const [userData, setUserData] = useState<UserData | null>(null);
-    const [loading, error] = useSignInForm(userData, closeModal);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
+    const { setUser } = useAction();
 
-    const onSubmit = (data: Inputs): void => {
-        setUserData(data);
+    console.log('render');
+
+    const onSubmit = async (data: Inputs): Promise<void> => {
+        setLoading(true);
+        try {
+            const response = await AuthService.loginUser(data);
+            LocalStorageService.setTokenToLocalStorage(response.data.token);
+            setUser(response.data.user);
+            closeModal();
+        } catch (e) {
+            if (e.response) {
+                setError(e.response.data?.message || UNEXPECTED_ERROR);
+            }
+        }
+        setLoading(false);
     };
 
     const onRegistrationClick = (): void => {

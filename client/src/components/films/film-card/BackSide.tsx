@@ -1,20 +1,32 @@
 import React, { FC } from 'react';
 import style from './filmCard.module.scss';
 
-const BackSide: FC = () => {
+interface IBackSideProps {
+    description: string;
+    age: string;
+    endDate: string;
+    startDate: string;
+    genre: string;
+}
+
+const BackSide: FC<IBackSideProps> = ({
+    description,
+    age,
+    startDate,
+    endDate,
+    genre,
+}) => {
     return (
         <div className={style.back}>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. A magni
-            nihil quam recusandae repellat sit? Animi delectus enim harum illum,
-            nam nisi suscipit. Ad dolores harum illo in ipsum, laboriosam
-            maiores, modi praesentium quae, quas quo unde? Ad asperiores
-            consequatur eum excepturi necessitatibus provident repellendus
-            similique totam vero voluptas! A cumque est hic, minus nisi non quo
-            similique tenetur! A animi architecto beatae blanditiis doloremque
-            incidunt maiores provident quisquam sapiente similique. Commodi
-            culpa, dolore dolorum, enim est impedit ipsa quibusdam quis, rem
-            reprehenderit temporibus totam ut. Ad aliquam aperiam cum illo ipsa
-            maxime modi, officiis quaerat quisquam rem reprehenderit, veritatis?
+            <div className={style.description}>{description}</div>
+            <hr />
+            <div className={style.date}>{genre}</div>
+            <hr />
+            <div className={style.date}>Age: {age}</div>
+            <hr />
+            <div className={style.date}>Start: {startDate}</div>
+            <hr />
+            <div className={style.date}>End: {endDate}</div>
         </div>
     );
 };

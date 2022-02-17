@@ -28,6 +28,9 @@ export class Film {
 
   @Prop({ required: true })
   endDate: string;
+
+  @Prop({ required: true })
+  rating: string;
 }
 
 export const FilmSchema = SchemaFactory.createForClass(Film);

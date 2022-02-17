@@ -1,14 +1,17 @@
 import React, { FC } from 'react';
 import { Row } from 'react-bootstrap';
 import FilmCard from './film-card/FilmCard';
+import { IFilm } from '../../services/types';
 
-const films: number[] = [1, 2, 3, 4, 5, 6];
+interface IFilmsProps {
+    films: IFilm[];
+}
 
-const Films: FC = () => {
+const Films: FC<IFilmsProps> = ({ films }) => {
     return (
-        <Row className="d-flex">
-            {films.map((item) => (
-                <FilmCard key={item} />
+        <Row className="d-flex flex-grow-1 justify-content-between">
+            {films.map((film) => (
+                <FilmCard key={film._id} film={film} />
             ))}
         </Row>
     );

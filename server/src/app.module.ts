@@ -5,6 +5,8 @@ import { UsersModule } from './users/users.module';
 import { OrdersModule } from './orders/orders.module';
 import { AuthModule } from './auth/auth.module';
 import { FilmsModule } from './films/films.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import * as path from 'path';
 
 @Module({
   controllers: [],
@@ -12,6 +14,9 @@ import { FilmsModule } from './films/films.module';
   imports: [
     ConfigModule.forRoot({
       envFilePath: '.env',
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: path.resolve(__dirname, '..', 'static'),
     }),
     MongooseModule.forRoot(process.env.MONGODB_DB_URI),
     UsersModule,

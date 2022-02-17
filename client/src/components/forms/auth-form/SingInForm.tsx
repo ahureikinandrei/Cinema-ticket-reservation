@@ -36,8 +36,6 @@ const SingInForm: FC<IAuthFormProps> = ({ closeModal, changeFormType }) => {
     const [error, setError] = useState('');
     const { setUser } = useAction();
 
-    console.log('render');
-
     const onSubmit = async (data: Inputs): Promise<void> => {
         setLoading(true);
         try {

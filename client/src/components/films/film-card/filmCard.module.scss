@@ -1,12 +1,14 @@
 .card {
-  width: 210px;
-  height: 330px;
+  width: 160px;
+  height: 300px;
   flex-direction: column;
   justify-content: center;
   position: relative;
   align-items: center;
   perspective: 1000px;
   color: white;
+  cursor: pointer;
+
   .front,
   .back {
     display: flex;
@@ -24,11 +26,20 @@
     box-shadow: 0 0 10px 3px rgba(153, 51, 204, 1);
     overflow: hidden;
   }
+
   .front {
     .image {
       width: 100%;
       flex-grow: 1;
     }
+
+    .name {
+      height: 20px;
+      width: 100%;
+      overflow: hidden;
+      text-wrap: none;
+    }
+
     .description {
       padding-left: 6px;
       width: 100%;
@@ -36,12 +47,35 @@
       flex-direction: column;
     }
   }
+
   .back {
     transform: rotateY(180deg);
+    padding: 10px;
+
+    hr {
+      margin: 5px;
+    }
+
+    .description {
+      height: 170px;
+      width: 100%;
+      overflow: hidden;
+      text-wrap: none;
+    }
+    date {
+      font-size: 0.5rem;
+      padding-left: 10px;
+      height: 20px;
+      width: 100%;
+      overflow: hidden;
+      text-wrap: none;
+    }
   }
+
   &:hover .front {
     transform: rotateY(180deg);
   }
+
   &:hover .back {
     transform: rotateY(360deg);
   }

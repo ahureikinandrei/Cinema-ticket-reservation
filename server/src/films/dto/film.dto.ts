@@ -6,4 +6,5 @@ export class FilmDto {
   readonly img: string;
   readonly startDate: string;
   readonly endDate: string;
+  readonly rating: string;
 }

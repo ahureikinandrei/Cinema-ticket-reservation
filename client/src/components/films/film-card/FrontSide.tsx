@@ -3,19 +3,22 @@ import { Image } from 'react-bootstrap';
 import { Rating } from 'react-simple-star-rating';
 import style from './filmCard.module.scss';
 
-const defaultImage =
-    'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2048px-No_image_available.svg.png';
+interface IFrontSideProps {
+    name: string;
+    rating: string;
+    img: string;
+}
 
-const FrontSide: FC = () => {
+const FrontSide: FC<IFrontSideProps> = ({ name, rating, img }) => {
     return (
         <div className={style.front}>
             <div className={style.image}>
-                <Image width="100%" height="100%" src={defaultImage} />
+                <Image width={160} height={240} src={img} />
             </div>
             <div className={style.description}>
-                Samsung...
+                <div className={style.name}>{name}</div>
                 <Rating
-                    initialValue={4}
+                    initialValue={+rating}
                     ratingValue={0}
                     fillColor="gold"
                     size={20}

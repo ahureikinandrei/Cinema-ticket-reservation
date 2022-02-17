@@ -21,4 +21,9 @@ export class FilesService {
       );
     }
   }
+
+  async returnFile(name: string): Promise<Buffer> {
+    const filePath = path.resolve(__dirname, '..', '..', 'static');
+    return fs.readFileSync(path.join(filePath, name));
+  }
 }

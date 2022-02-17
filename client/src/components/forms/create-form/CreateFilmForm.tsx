@@ -13,6 +13,7 @@ const CreateFilmForm: FC = () => {
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
     const [file, setFile] = useState<string | Blob>('');
+    const [rating, setRating] = useState<string>('');
 
     const { setAppMessage } = useAction();
 
@@ -36,6 +37,10 @@ const CreateFilmForm: FC = () => {
         setEndDate(event.target.value);
     };
 
+    const addRating = (event: ChangeEvent<HTMLInputElement>): void => {
+        setRating(event.target.value);
+    };
+
     const selectFile = (event: ChangeEvent<HTMLInputElement>): void => {
         if (!event.target || !event.target.files) {
             return;
@@ -54,6 +59,7 @@ const CreateFilmForm: FC = () => {
         formData.append('img', file);
         formData.append('startDate', startDate);
         formData.append('endDate', endDate);
+        formData.append('rating', rating);
         const errorMessage = await FilmService.createFilm(formData);
 
         if (!errorMessage) {
@@ -63,6 +69,7 @@ const CreateFilmForm: FC = () => {
             setGenre('');
             setStartDate('');
             setEndDate('');
+            setRating('');
             return;
         }
         setAppMessage(errorMessage);
@@ -100,7 +107,7 @@ const CreateFilmForm: FC = () => {
                         />
                     </label>
                     <Dropdown className="mt-2 mb-2">
-                        <Dropdown.Toggle>
+                        <Dropdown.Toggle variant="secondary" size="sm">
                             {selectedGenre || 'Add genre'}
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
@@ -133,6 +140,13 @@ const CreateFilmForm: FC = () => {
                         value={endDate}
                         onChange={addEndDate}
                         className="mt-3"
+                        required
+                    />
+                    <Form.Control
+                        value={rating}
+                        onChange={addRating}
+                        className="mt-3"
+                        placeholder="Rating"
                         required
                     />
                     <Button type="submit" variant="outline-light mt-3">

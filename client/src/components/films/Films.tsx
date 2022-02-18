@@ -9,7 +9,7 @@ interface IFilmsProps {
 
 const Films: FC<IFilmsProps> = ({ films }) => {
     return (
-        <Row className="d-flex flex-grow-1 justify-content-between">
+        <Row className="d-flex flex-grow-1">
             {films.map((film) => (
                 <FilmCard key={film._id} film={film} />
             ))}

@@ -36,7 +36,7 @@ const FilmInfo: FC<IFilmInfoProps> = ({ film, error }) => {
                         readonly
                     />
                     <hr />
-                    Rated: {age}
+                    Rated: +{age}
                 </div>
             </div>
             <Row className={style.description}>{description}</Row>

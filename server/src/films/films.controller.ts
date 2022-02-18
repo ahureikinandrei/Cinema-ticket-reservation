@@ -7,6 +7,7 @@ import {
   UseGuards,
   UseInterceptors,
   Param,
+  Query,
 } from '@nestjs/common';
 import { Role } from '../auth/roles-auth.decorator';
 import { Roles } from '../users/types/roles.enum';
@@ -15,6 +16,7 @@ import { FilmsService } from './films.service';
 import { FilmDto } from './dto/film.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ObjectId } from 'mongoose';
+import { QueryParams } from './dto/queryParams.dto';
 
 @Controller('films')
 export class FilmsController {
@@ -29,8 +31,13 @@ export class FilmsController {
   }
 
   @Get()
-  getFilms() {
-    return this.filmsService.getFilms();
+  getFilms(@Query() queryParams: QueryParams) {
+    return this.filmsService.getFilms(queryParams);
+  }
+
+  @Get('/films')
+  getAllFilms() {
+    return this.filmsService.getAllFilms();
   }
 
   @Get(':id')

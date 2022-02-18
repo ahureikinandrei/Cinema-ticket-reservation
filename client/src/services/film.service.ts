@@ -1,8 +1,13 @@
 import { AxiosResponse } from 'axios';
 import axios from '../core/axios';
-import { FILMS_CREATE_PATH, FILMS_PATH } from '../constants/routes';
+import {
+    ALL_FILMS_PATH,
+    FILMS_CREATE_PATH,
+    FILMS_PATH,
+} from '../constants/routes';
 import { UNEXPECTED_ERROR } from '../constants/messages';
-import { IFilm } from './types';
+import { IFilm, IFilmsWithPagination } from './types';
+import { ISearchState } from '../redux/search-films/reducer';
 
 export default class FilmService {
     static async createFilm(filmData: FormData): Promise<string | null> {
@@ -16,8 +21,25 @@ export default class FilmService {
         return null;
     }
 
-    static getFilms(): Promise<AxiosResponse<IFilm[]>> {
-        return axios.get(FILMS_PATH);
+    static getAllFilms(): Promise<AxiosResponse<IFilm[]>> {
+        return axios.get(ALL_FILMS_PATH);
+    }
+
+    static getFilms(
+        page: number,
+        limit: number,
+        searchParams: ISearchState
+    ): Promise<AxiosResponse<IFilmsWithPagination>> {
+        const { searchValue, ageRating, genre } = searchParams;
+        return axios.get(FILMS_PATH, {
+            params: {
+                page,
+                limit,
+                genre,
+                name: searchValue,
+                age: ageRating,
+            },
+        });
     }
 
     static getFilmById(id = ''): Promise<AxiosResponse<IFilm>> {

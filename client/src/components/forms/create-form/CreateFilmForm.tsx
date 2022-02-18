@@ -1,9 +1,9 @@
 import React, { FC, useState, ChangeEvent, FormEvent } from 'react';
 import { Card, Form, Dropdown, Button } from 'react-bootstrap';
-import style from './createFilmForm.module.scss';
 import { genres } from '../../../constants/filmConstants';
 import FilmService from '../../../services/film.service';
 import { useAction } from '../../../hooks/redux';
+import style from './createFilmForm.module.scss';
 
 const CreateFilmForm: FC = () => {
     const [name, setName] = useState('');
@@ -123,6 +123,7 @@ const CreateFilmForm: FC = () => {
                     </Dropdown>
                     <Form.Control
                         value={age}
+                        type="number"
                         onChange={addAge}
                         className="mt-3"
                         placeholder="Age"

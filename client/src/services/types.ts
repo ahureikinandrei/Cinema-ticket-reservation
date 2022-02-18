@@ -7,7 +7,7 @@ export interface IAuthData {
 
 export interface IFilm {
     _id: string;
-    age: string;
+    age: number;
     description: string;
     endDate: string;
     genre: string;
@@ -15,4 +15,9 @@ export interface IFilm {
     name: string;
     startDate: string;
     rating: string;
+}
+
+export interface IFilmsWithPagination {
+    films: IFilm[];
+    total: number;
 }

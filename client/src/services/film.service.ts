@@ -30,12 +30,13 @@ export default class FilmService {
         limit: number,
         searchParams: ISearchState
     ): Promise<AxiosResponse<IFilmsWithPagination>> {
-        const { searchValue, ageRating, genre } = searchParams;
+        const { searchValue, ageRating, genre, rating } = searchParams;
         return axios.get(FILMS_PATH, {
             params: {
                 page,
                 limit,
                 genre,
+                rating,
                 name: searchValue,
                 age: ageRating,
             },

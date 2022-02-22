@@ -28,7 +28,7 @@ export class FilmsService {
   }
 
   async getFilms(queryParams: QueryParams) {
-    const { name, page = 1, limit, age, genre } = queryParams;
+    const { name, page = 1, limit, age, genre, rating } = queryParams;
     const options = {};
 
     if (name) {
@@ -39,10 +39,12 @@ export class FilmsService {
       Object.assign(options, { genre: new RegExp(genre, 'i') });
     }
 
+    if (rating > 0) {
+      Object.assign(options, { rating: { $gte: rating } });
+    }
+
     if (age > 0) {
-      if (age > 0) {
-        Object.assign(options, { age: { $gte: age } });
-      }
+      Object.assign(options, { age: { $gte: age } });
     }
 
     const total = await this.filmModel.count(options);

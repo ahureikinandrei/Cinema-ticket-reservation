@@ -5,3 +5,9 @@ export const AUTH_PATH = '/auth/me';
 export const FILMS_PATH = '/films/';
 export const ALL_FILMS_PATH = '/films/films';
 export const FILMS_CREATE_PATH = '/films/create';
+
+export const CINEMA_CREATE_PATH = '/cinema/create';
+export const ALL_CINEMA_PATH = '/cinema/';
+
+export const CREATE_SESSION_PATH = '/sessions/create';
+export const ALL_SESSIONS_PATH = '/sessions/';

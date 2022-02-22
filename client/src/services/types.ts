@@ -21,3 +21,29 @@ export interface IFilmsWithPagination {
     films: IFilm[];
     total: number;
 }
+
+export interface ICinemaData {
+    _id: string;
+    name: string;
+    city: string;
+}
+
+export interface ICreateCinemaData {
+    name: string;
+    city: string;
+}
+
+export interface ISessionData {
+    _id: string;
+    date: string;
+    time: string;
+    film: string;
+    cinema: string;
+}
+
+export interface ICreateSessionData {
+    date: string;
+    time: string;
+    film: string;
+    cinema: string;
+}

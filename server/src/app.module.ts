@@ -6,6 +6,8 @@ import { OrdersModule } from './orders/orders.module';
 import { AuthModule } from './auth/auth.module';
 import { FilmsModule } from './films/films.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
+import { CinemaModule } from './cinema/cinema.module';
+import { SessionsModule } from './sessions/sessions.module';
 import * as path from 'path';
 
 @Module({
@@ -23,6 +25,8 @@ import * as path from 'path';
     OrdersModule,
     AuthModule,
     FilmsModule,
+    CinemaModule,
+    SessionsModule,
   ],
 })
 export class AppModule {}

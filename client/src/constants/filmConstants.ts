@@ -1,4 +1,5 @@
 export const genres = [
+    'any',
     'detective',
     'drama',
     'cartoon',
@@ -8,5 +9,7 @@ export const genres = [
     'fantasy',
     'romance',
 ];
+
+export const ANY_GENRE = 'any';
 
 export const FILMS_ON_PAGE = 6;

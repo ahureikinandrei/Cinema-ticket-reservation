@@ -1,24 +1,33 @@
-import React, { FC, FormEvent, useState } from 'react';
+import React, { ChangeEvent, FC, FormEvent, useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import { Button, Dropdown } from 'react-bootstrap';
-import { genres } from '../../../constants/filmConstants';
+import { ANY_GENRE, genres } from '../../../constants/filmConstants';
 import { ageCategories } from '../../../constants/searchCategories';
 import { useAction } from '../../../hooks/redux';
 
 const CategoriesForm: FC = () => {
-    const [selectedGenre, setGenreState] = useState('Add genre');
+    const [selectedGenre, setGenreState] = useState('any');
     const [selectedAge, setAge] = useState(0);
-    const { setAgeRating, setGenre } = useAction();
+    const [selectedRating, setRatingState] = useState(0);
+    const { setAgeRating, setGenre, setRating } = useAction();
 
     const onCategoriesChange = (event: FormEvent): void => {
         event.preventDefault();
         setAgeRating(selectedAge);
-        setGenre(selectedGenre);
+        setRating(selectedRating);
+
+        const genre = selectedGenre === ANY_GENRE ? '' : selectedGenre;
+        setGenre(genre);
+    };
+
+    const changeRating = (event: ChangeEvent<HTMLInputElement>): void => {
+        setRatingState(Number(event.target.value));
     };
 
     return (
         <Form onSubmit={onCategoriesChange}>
-            <Dropdown className="mt-2 mb-2">
+            <Form.Label className="mt-3">Genre</Form.Label>
+            <Dropdown>
                 <Dropdown.Toggle variant="secondary" size="sm">
                     {selectedGenre || 'Genre'}
                 </Dropdown.Toggle>
@@ -33,7 +42,7 @@ const CategoriesForm: FC = () => {
                     ))}
                 </Dropdown.Menu>
             </Dropdown>
-            <Form.Label>Age</Form.Label>
+            <Form.Label className="mt-3">Age</Form.Label>
             {ageCategories.map((age, index) => (
                 <Form.Check
                     checked={selectedAge === index}
@@ -47,6 +56,17 @@ const CategoriesForm: FC = () => {
                     }}
                 />
             ))}
+            <Form.Label className="mt-3">Rating</Form.Label>
+            <Form.Control
+                value={selectedRating}
+                type="number"
+                onChange={changeRating}
+                placeholder="Age"
+                required
+                min={0}
+                max={5}
+                step={0.1}
+            />
             <Button type="submit" className="mt-3" variant="outline-light">
                 Search
             </Button>

@@ -6,7 +6,7 @@ import Films from '../../components/films/Films';
 import FilmService from '../../services/film.service';
 import { IFilm } from '../../services/types';
 import Pages from '../../components/pagination/Pages';
-import { UNEXPECTED_ERROR } from '../../constants/messages';
+import { NO_RESULT, UNEXPECTED_ERROR } from '../../constants/messages';
 import { FILMS_ON_PAGE } from '../../constants/filmConstants';
 import style from './filmsPage.module.scss';
 import { useAppSelector } from '../../hooks/redux';
@@ -27,8 +27,14 @@ const FilmsPage: FC = () => {
                 searchParams
             );
 
-            setFilms(data.films);
-            setTotalPages(data.total);
+            if (data.films.length) {
+                setError('');
+                setFilms(data.films);
+                setTotalPages(data.total);
+                return;
+            }
+
+            setError(NO_RESULT);
         } catch (e) {
             if (e.response) {
                 setError(e.response.data?.message || UNEXPECTED_ERROR);
@@ -37,7 +43,6 @@ const FilmsPage: FC = () => {
     };
 
     useEffect(() => {
-        console.log(123);
         getFilms();
     }, [searchParams, page]);
 

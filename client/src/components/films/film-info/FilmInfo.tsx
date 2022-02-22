@@ -39,7 +39,7 @@ const FilmInfo: FC<IFilmInfoProps> = ({ film, error }) => {
                     Rated: +{age}
                 </div>
             </div>
-            <Row className={style.description}>{description}</Row>
+            <Row className={`${style.description} mt-3`}>{description}</Row>
         </div>
     );
 };

@@ -4,4 +4,5 @@ export class QueryParams {
   readonly limit: number;
   readonly age: number;
   readonly genre: string;
+  readonly rating: number;
 }

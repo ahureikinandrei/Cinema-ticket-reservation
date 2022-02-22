@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 export interface ISearchState {
     searchValue: string;
     ageRating: number;
+    rating: number;
     genre: string;
 }
 
@@ -10,6 +11,7 @@ const initialState: ISearchState = {
     searchValue: '',
     ageRating: 0,
     genre: '',
+    rating: 0,
 };
 
 const searchFilmSlice = createSlice({
@@ -24,6 +26,9 @@ const searchFilmSlice = createSlice({
         },
         setGenre(state, action: PayloadAction<string>) {
             state.genre = action.payload;
+        },
+        setRating(state, action: PayloadAction<number>) {
+            state.rating = action.payload;
         },
     },
 });

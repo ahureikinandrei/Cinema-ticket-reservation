@@ -37,8 +37,8 @@ export interface ISessionData {
     _id: string;
     date: string;
     time: string;
-    film: string;
-    cinema: string;
+    film: IFilm;
+    cinema: ICinemaData;
 }
 
 export interface ICreateSessionData {

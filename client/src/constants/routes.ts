@@ -11,3 +11,4 @@ export const ALL_CINEMA_PATH = '/cinema/';
 
 export const CREATE_SESSION_PATH = '/sessions/create';
 export const ALL_SESSIONS_PATH = '/sessions/';
+export const SESSIONS_BY_FILM_PATH = '/sessions/film/';

@@ -10,6 +10,7 @@ import { AdminRouter } from './routes/AdminRoute';
 
 import './App.scss';
 import FilmPage from './pages/film-page/FIlmPage';
+import SessionPage from './pages/session-page/SessionPage';
 
 const App: FC = () => {
     const { authUser } = useAction();
@@ -27,6 +28,7 @@ const App: FC = () => {
             <Routes>
                 <Route path="/" element={<FilmsPage />} />
                 <Route path="/film/:id" element={<FilmPage />} />
+                <Route path="/session/:id" element={<SessionPage />} />
                 <Route
                     path="create"
                     element={

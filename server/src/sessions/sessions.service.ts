@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { SessionDto } from './dto/session.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Session, SessionDocument } from './schemas/session.schema';
-import { Model } from 'mongoose';
+import { Model, ObjectId } from 'mongoose';
 
 @Injectable()
 export class SessionsService {
@@ -10,8 +10,15 @@ export class SessionsService {
     @InjectModel(Session.name) private sessionModel: Model<SessionDocument>,
   ) {}
 
-  async addSession(dto: SessionDto) {
-    const session = await this.sessionModel.create(dto);
-    return session;
+  addSession(dto: SessionDto) {
+    return this.sessionModel.create(dto);
+  }
+
+  getSessionById(id) {
+    return this.sessionModel.findById(id).populate('film').populate('cinema');
+  }
+
+  getSessionByFilmId(id: ObjectId) {
+    return this.sessionModel.find({ film: id }).populate('cinema');
   }
 }

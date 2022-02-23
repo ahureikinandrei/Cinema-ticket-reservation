@@ -1,7 +1,11 @@
 import { AxiosResponse } from 'axios';
 import axios from '../core/axios';
 import { UNEXPECTED_ERROR } from '../constants/messages';
-import { ALL_SESSIONS_PATH, CREATE_SESSION_PATH } from '../constants/routes';
+import {
+    ALL_SESSIONS_PATH,
+    CREATE_SESSION_PATH,
+    SESSIONS_BY_FILM_PATH,
+} from '../constants/routes';
 import { ICreateSessionData, ISessionData } from './types';
 
 export default class SessionService {
@@ -18,7 +22,6 @@ export default class SessionService {
                 return e.response.data?.message || UNEXPECTED_ERROR;
             }
         }
-        console.log(321);
         return null;
     }
 
@@ -28,5 +31,11 @@ export default class SessionService {
 
     static getSessionById(id = ''): Promise<AxiosResponse<ISessionData>> {
         return axios.get(ALL_SESSIONS_PATH + id);
+    }
+
+    static getSessionsByFilmsId(
+        id = ''
+    ): Promise<AxiosResponse<ISessionData[]>> {
+        return axios.get(SESSIONS_BY_FILM_PATH + id);
     }
 }

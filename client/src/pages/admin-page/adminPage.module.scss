@@ -6,30 +6,17 @@
   box-sizing: border-box;
   margin-left: auto;
   margin-right: auto;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-image: url(../../assets/images/middle-earth.jpg);
 }
 
 .wrapper {
   display: flex;
   align-items: center;
-  justify-content: center;
   flex-direction: column;
   flex-grow: 1;
 }
 
 .tab-content {
+  display: none;
   width: 100%;
   max-width: 600px;
-}
-
-.create_card {
-  width: 100%;
-  max-width: 600px;
-  height: 535px;
-  display: flex;
-  align-items: center;
-  padding: 10px 0;
-  border-radius: 30px !important;
 }

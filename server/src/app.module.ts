@@ -8,6 +8,8 @@ import { FilmsModule } from './films/films.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { CinemaModule } from './cinema/cinema.module';
 import { SessionsModule } from './sessions/sessions.module';
+import { HallModule } from './hall/hall.module';
+import { SolidSeatsModule } from './silid-seats/solid-seats.module';
 import * as path from 'path';
 
 @Module({
@@ -27,6 +29,8 @@ import * as path from 'path';
     FilmsModule,
     CinemaModule,
     SessionsModule,
+    HallModule,
+    SolidSeatsModule,
   ],
 })
 export class AppModule {}

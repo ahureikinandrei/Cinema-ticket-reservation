@@ -1,0 +1,46 @@
+.hall {
+  width: 100%;
+  max-width: 600px;
+  color: white;
+  border-top: 1px solid white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .seat_bought {
+    cursor: not-allowed;
+
+    svg path {
+      fill: #88888d;
+    }
+  }
+
+  span {
+    margin-bottom: 80px;
+  }
+
+  .row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 0;
+
+    span {
+      width: 10px;
+      margin: 0 0.25rem;
+      font-size: 1.5rem;
+    }
+
+    .seat {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-shrink: 0;
+    }
+  }
+}
+
+
+
+

@@ -11,12 +11,10 @@ export class CinemaService {
   ) {}
 
   async addCinema(dto: CinemaDto) {
-    const cinema = await this.cinemaModel.create(dto);
-    return cinema;
+    return await this.cinemaModel.create(dto);
   }
 
   async getAll() {
-    const cinemas = await this.cinemaModel.find().exec();
-    return cinemas;
+    return await this.cinemaModel.find().exec();
   }
 }

@@ -15,7 +15,12 @@ export class SessionsService {
   }
 
   getSessionById(id) {
-    return this.sessionModel.findById(id).populate('film').populate('cinema');
+    return this.sessionModel
+      .findById(id)
+      .populate('film')
+      .populate('cinema')
+      .populate('hall')
+      .populate('price');
   }
 
   getSessionByFilmId(id: ObjectId) {

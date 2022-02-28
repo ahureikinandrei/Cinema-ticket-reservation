@@ -1,6 +1,6 @@
 import React, { FC, useState, ChangeEvent, FormEvent } from 'react';
 import { Form, Dropdown, Button } from 'react-bootstrap';
-import { genres } from '../../../constants/filmConstants';
+import { GENRES } from '../../../constants/filmConstants';
 import FilmService from '../../../services/film.service';
 import { useAction } from '../../../hooks/redux';
 import style from './createFilmForm.module.scss';
@@ -106,7 +106,7 @@ const FilmForm: FC = () => {
                     {selectedGenre || 'Add genre'}
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                    {genres.map((genre) => (
+                    {GENRES.map((genre) => (
                         <Dropdown.Item
                             onClick={() => setGenre(genre)}
                             key={genre}

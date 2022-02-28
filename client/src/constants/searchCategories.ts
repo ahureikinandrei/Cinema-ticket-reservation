@@ -1,1 +1,1 @@
-export const ageCategories = ['All age', '+3', '+6', '+12', '+16', '+18'];
+export const AGE_CATEGORIES = ['All age', '+3', '+6', '+12', '+16', '+18'];

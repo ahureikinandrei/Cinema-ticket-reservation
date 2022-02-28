@@ -1,4 +1,4 @@
-export const genres = [
+export const GENRES = [
     'any',
     'detective',
     'drama',
@@ -9,6 +9,8 @@ export const genres = [
     'fantasy',
     'romance',
 ];
+
+export const SEAT_TYPES = ['simple', 'love', 'prime', 'empty'];
 
 export const ANY_GENRE = 'any';
 

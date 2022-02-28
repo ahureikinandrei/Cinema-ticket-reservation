@@ -1,8 +1,8 @@
 import React, { ChangeEvent, FC, FormEvent, useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import { Button, Dropdown } from 'react-bootstrap';
-import { ANY_GENRE, genres } from '../../../constants/filmConstants';
-import { ageCategories } from '../../../constants/searchCategories';
+import { ANY_GENRE, GENRES } from '../../../constants/filmConstants';
+import { AGE_CATEGORIES } from '../../../constants/searchCategories';
 import { useAction } from '../../../hooks/redux';
 
 const CategoriesForm: FC = () => {
@@ -32,7 +32,7 @@ const CategoriesForm: FC = () => {
                     {selectedGenre || 'Genre'}
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                    {genres.map((genre) => (
+                    {GENRES.map((genre) => (
                         <Dropdown.Item
                             onClick={() => setGenreState(genre)}
                             key={genre}
@@ -43,7 +43,7 @@ const CategoriesForm: FC = () => {
                 </Dropdown.Menu>
             </Dropdown>
             <Form.Label className="mt-3">Age</Form.Label>
-            {ageCategories.map((age, index) => (
+            {AGE_CATEGORIES.map((age, index) => (
                 <Form.Check
                     checked={selectedAge === index}
                     name="Age"

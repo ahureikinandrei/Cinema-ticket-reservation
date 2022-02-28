@@ -5,4 +5,5 @@ export class SessionDto {
   readonly time: string;
   readonly film: ObjectId;
   readonly cinema: ObjectId;
+  readonly hall: ObjectId;
 }

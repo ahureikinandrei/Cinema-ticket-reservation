@@ -9,7 +9,7 @@ interface ISessionListProps {
 
 const SessionList: FC<ISessionListProps> = ({ sessions }) => {
     return (
-        <ListGroup className="mt-auto w-100 mb-3">
+        <ListGroup className="mb-3 align-self-start">
             {sessions.map((session) => {
                 const { date, time, _id, cinema } = session;
                 const { name, city } = cinema;

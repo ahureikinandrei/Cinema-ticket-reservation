@@ -1,12 +1,13 @@
 import React, { FC, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
+import Spinner from 'react-bootstrap/Spinner';
 import SessionService from '../../services/session.service';
 import { ISessionData } from '../../services/types';
-import style from './sessionPage.module.scss';
 import Hall from '../../components/hall/Hall';
 import FilmInfo from '../../components/films/film-info/FilmInfo';
 import { UNEXPECTED_ERROR } from '../../constants/messages';
+import style from './sessionPage.module.scss';
 
 const SessionPage: FC = () => {
     const { id } = useParams();
@@ -28,7 +29,7 @@ const SessionPage: FC = () => {
         getSession();
     }, []);
 
-    if (!session) {
+    if (error) {
         return (
             <div className="text-light">Something Went Wrong. Try Again</div>
         );
@@ -36,8 +37,17 @@ const SessionPage: FC = () => {
 
     return (
         <Container className={style.container}>
-            <FilmInfo film={session.film} error={error} />
-            <Hall />
+            {session ? (
+                <FilmInfo film={session.film} error={error} />
+            ) : (
+                <Spinner animation="grow" variant="light" />
+            )}
+            {session && (
+                <Hall
+                    hallData={session.hall.schema}
+                    greedWidth={session.hall.rowSize}
+                />
+            )}
         </Container>
     );
 };

@@ -29,8 +29,10 @@ export default class SessionService {
         return axios.get(ALL_SESSIONS_PATH);
     }
 
-    static getSessionById(id = ''): Promise<AxiosResponse<ISessionData>> {
-        return axios.get(ALL_SESSIONS_PATH + id);
+    static async getSessionById(id = ''): Promise<AxiosResponse<ISessionData>> {
+        const response = await axios.get(ALL_SESSIONS_PATH + id);
+        console.log(response);
+        return response;
     }
 
     static getSessionsByFilmsId(

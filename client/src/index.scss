@@ -7,3 +7,18 @@ body {
   padding: 0;
   font-family: 'Vibur', sans-serif;
 }
+
+.popover-body {
+  padding: 0;
+  border-radius: 10px;
+  background-color: rgba(80, 79, 79, 0.85);
+}
+
+.bs-popover-top {
+  border-radius: 10px;
+  background-color: rgba(80, 79, 79, 0.85);
+}
+
+.bs-popover-top > .popover-arrow::after {
+  border-top-color: rgba(80, 79, 79, 0.85);
+}

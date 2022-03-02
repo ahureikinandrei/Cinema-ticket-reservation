@@ -7,17 +7,20 @@ import { ISessionData } from '../../services/types';
 import Hall from '../../components/hall/Hall';
 import FilmInfo from '../../components/films/film-info/FilmInfo';
 import { UNEXPECTED_ERROR } from '../../constants/messages';
+import { useAction } from '../../hooks/redux';
 import style from './sessionPage.module.scss';
 
 const SessionPage: FC = () => {
     const { id } = useParams();
     const [session, setSession] = useState<ISessionData | null>(null);
     const [error, setError] = useState<string>('');
+    const { setSelectedSeats } = useAction();
 
     const getSession = async (): Promise<void> => {
         try {
             const { data } = await SessionService.getSessionById(id);
             setSession(data);
+            setSelectedSeats(data.hall.schema);
         } catch (e) {
             if (e.response) {
                 setError(e.response.data?.message || UNEXPECTED_ERROR);

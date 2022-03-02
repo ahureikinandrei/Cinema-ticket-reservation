@@ -17,3 +17,5 @@ export enum SeatsTypes {
     love = 2,
     empty = 3,
 }
+
+export const seatDescription = ['simple', 'prime', 'love'];

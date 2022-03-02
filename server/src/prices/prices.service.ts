@@ -10,12 +10,7 @@ export class PricesService {
     @InjectModel(Price.name) private priceModel: Model<PriceDocument>,
   ) {}
 
-  addPrice(dto: PriceDto) {
-    const priseData = {
-      ...dto,
-      seatsStatus: [],
-    };
-
-    return this.priceModel.create(priseData);
+  async addPrice(dto: PriceDto) {
+    return await this.priceModel.create(dto);
   }
 }

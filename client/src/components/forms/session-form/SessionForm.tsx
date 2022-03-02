@@ -41,12 +41,15 @@ const SessionForm: FC = () => {
             return;
         }
 
+        console.log(selectedHall.schema);
+
         const priceDocumentId = await PriceServiceService.createPrice({
             seatPrice: {
                 simple: simpleSeatPrice,
                 love: loveSeatPrice,
                 prime: primeSeatPrice,
             },
+            seatsStatus: selectedHall.schema,
         });
 
         if (!priceDocumentId) {
@@ -60,7 +63,6 @@ const SessionForm: FC = () => {
             time,
             cinema: selectedCinema._id,
             film: selectedFilm._id,
-            hall: selectedHall._id,
             price: priceDocumentId,
         });
 

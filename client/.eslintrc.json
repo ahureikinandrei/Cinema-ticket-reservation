@@ -77,6 +77,7 @@
     "consistent-return": "off",
     "no-underscore-dangle": "off",
     "react/no-array-index-key": "off",
+    "treatUndefinedAsUnspecified": "off",
     "react/function-component-definition": [
       "warn",
       {

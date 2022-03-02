@@ -18,8 +18,25 @@ export class Price {
     prime: { type: string };
   };
 
-  @Prop()
-  seatsStatus: [[boolean]];
+  @Prop([
+    [
+      raw({
+        type: { type: Number },
+        size: { type: Number },
+        isBought: {
+          type: Boolean,
+          default: false,
+        },
+      }),
+    ],
+  ])
+  seatsStatus: [
+    {
+      type: { type: string };
+      size: number;
+      isBought: { type: boolean; default: false };
+    },
+  ];
 }
 
 export const PriceSchema = SchemaFactory.createForClass(Price);

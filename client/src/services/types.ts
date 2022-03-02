@@ -48,7 +48,6 @@ export interface ICreateSessionData {
     time: string;
     film: string;
     cinema: string;
-    hall: string;
     price: string;
 }
 
@@ -76,6 +75,7 @@ export interface IPriceCreateData {
         love: number;
         prime: number;
     };
+    seatsStatus: Array<ISeat[]>;
 }
 
 export interface IPriceData {
@@ -85,5 +85,5 @@ export interface IPriceData {
         love: number;
         prime: number;
     };
-    seatsStatus: Array<boolean[]>;
+    seatsStatus: Array<ISeat[]>;
 }

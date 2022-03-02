@@ -6,8 +6,13 @@ export default class PriceServiceService {
     static async createPrice(
         priceData: IPriceCreateData
     ): Promise<string | null> {
+        console.log(priceData);
         try {
-            const response = await axios.post(PRICE_CREATE_PATH, priceData);
+            const response = await axios.post<IPriceData>(
+                PRICE_CREATE_PATH,
+                priceData
+            );
+            console.log(response);
             return response.data._id;
         } catch (e) {
             return null;

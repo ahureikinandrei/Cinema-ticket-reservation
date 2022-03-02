@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { SessionDto } from './dto/session.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Session, SessionDocument } from './schemas/session.schema';
@@ -14,13 +14,18 @@ export class SessionsService {
     return this.sessionModel.create(dto);
   }
 
-  getSessionById(id) {
-    return this.sessionModel
+  async getSessionById(id) {
+    const session = await this.sessionModel
       .findById(id)
       .populate('film')
       .populate('cinema')
-      .populate('hall')
       .populate('price');
+
+    if (!session) {
+      throw new HttpException('Session not found', HttpStatus.NOT_FOUND);
+    }
+
+    return session;
   }
 
   getSessionByFilmId(id: ObjectId) {

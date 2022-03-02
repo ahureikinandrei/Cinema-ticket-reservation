@@ -39,8 +39,7 @@ export interface ISessionData {
     time: string;
     film: IFilm;
     cinema: ICinemaData;
-    hall: IHallData;
-    price: string;
+    price: IPriceData;
 }
 
 export interface ICreateSessionData {

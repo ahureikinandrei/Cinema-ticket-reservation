@@ -3,8 +3,6 @@ import HallRow from './hall-row/HallRow';
 import { ISeat } from '../../services/types';
 import style from './hall.module.scss';
 import { SeatsTypes } from './seats-types';
-import { useAppSelector } from '../../hooks/redux';
-import { getSelectedSeats } from '../../redux/order/selectors';
 
 interface IHallProps {
     hallData: Array<ISeat[]>;
@@ -16,10 +14,7 @@ const checkEmptyRow = (row: ISeat[]): boolean => {
 };
 
 const Hall: FC<IHallProps> = ({ hallData, greedWidth }) => {
-    const seatsStatus = useAppSelector(getSelectedSeats);
     const rowCounter = { current: 0 };
-
-    console.log(seatsStatus);
 
     return (
         <div className={style.hall}>

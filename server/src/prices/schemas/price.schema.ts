@@ -20,14 +20,14 @@ export class Price {
 
   @Prop([
     [
-      raw({
+      {
         type: { type: Number },
         size: { type: Number },
         isBought: {
           type: Boolean,
           default: false,
         },
-      }),
+      },
     ],
   ])
   seatsStatus: [

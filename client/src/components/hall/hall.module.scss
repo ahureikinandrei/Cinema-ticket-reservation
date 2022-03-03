@@ -1,3 +1,5 @@
+@import "../../variables";
+
 .hall {
   min-width: 200px;
   max-width: 600px;
@@ -7,14 +9,6 @@
   flex-direction: column;
   align-items: center;
   margin-bottom: 1rem;
-
-  .seat_bought {
-    cursor: not-allowed;
-
-    svg path {
-      fill: #88888d;
-    }
-  }
 
   span {
     margin-bottom: 80px;
@@ -62,27 +56,40 @@
       border: 1px solid white;
       box-sizing: border-box;
     }
+
+    .seat_bought {
+      cursor: not-allowed;
+      > svg, path {
+        fill: $seat_bought;
+      }
+    }
+
+    .seat_reserved {
+      > svg, path {
+        fill: $seat_reserved;
+      }
+    }
   }
 }
 
 .tooltip {
-  background-color: rgba(80, 79, 79, 0.85);
-  border-radius: 10px;
+  width: 120px;
+  height: 60px;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  width: 120px;
-  height: 60px;
+  background-color: $tooltip_background;
+  border-radius: 10px;
   color: white;
 
   &_seat {
     height: 40px;
     width: 40px;
-    border-radius: 10px;
-    border: 1px solid wheat;
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 10px;
+    border: 1px solid wheat;
   }
 }
 

@@ -1,9 +1,12 @@
 import React, { ReactElement } from 'react';
-import { ISeat } from '../../../services/types';
+import { ICreateSeat } from '../../../services/types';
 import style from '../hall.module.scss';
 import { seatsTypes } from '../seats-types';
 
-const HallRowGreed = (rowData: ISeat[], greedWidth: number): ReactElement[] => {
+const HallRowGreed = (
+    rowData: ICreateSeat[],
+    greedWidth: number
+): ReactElement[] => {
     const basis = 100 / greedWidth;
     return rowData.map((seat, index) => {
         const { size, type } = seat;

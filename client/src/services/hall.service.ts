@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
-import { ICreatHallSchemaData, IHallData } from './types';
 import axios from '../core/axios';
+import { ICreatHallSchemaData, IHallData } from './types';
 import { ALL_HALL_PATH, HALL_CREATE_PATH } from '../constants/routes';
 import { UNEXPECTED_ERROR } from '../constants/messages';
 

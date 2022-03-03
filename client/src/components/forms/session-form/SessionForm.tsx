@@ -41,8 +41,6 @@ const SessionForm: FC = () => {
             return;
         }
 
-        console.log(selectedHall.schema);
-
         const priceDocumentId = await PriceServiceService.createPrice({
             seatPrice: {
                 simple: simpleSeatPrice,
@@ -50,6 +48,7 @@ const SessionForm: FC = () => {
                 prime: primeSeatPrice,
             },
             seatsStatus: selectedHall.schema,
+            rowSize: selectedHall.rowSize,
         });
 
         if (!priceDocumentId) {

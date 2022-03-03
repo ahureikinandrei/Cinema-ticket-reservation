@@ -1,16 +1,15 @@
 import React, { FC } from 'react';
-import { ISeat } from '../../../services/types';
+import { ICreateSeat } from '../../../services/types';
 import HallRowGreed from './HallRowGreed';
 import style from '../hall.module.scss';
 
 interface IHallGreedProps {
-    greed: Array<ISeat[]>;
+    greed: Array<ICreateSeat[]>;
     greedWidth: number;
 }
 
 const HallGreed: FC<IHallGreedProps> = ({ greed, greedWidth }) => {
     return (
-        // eslint-disable-next-line jsx-a11y/no-static-element-interactions
         <div className={style.hall}>
             {greed.map((row, index) => {
                 return (

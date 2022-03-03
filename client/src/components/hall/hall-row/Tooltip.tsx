@@ -4,7 +4,18 @@ import PopoverBody from 'react-bootstrap/PopoverBody';
 import { seatDescription } from '../seats-types';
 import style from '../hall.module.scss';
 
-export const Tooltip = (seatNumber: number, type: number): ReactElement => {
+export const Tooltip = (
+    seatNumber: number,
+    type: number,
+    isBought: boolean
+): ReactElement => {
+    if (isBought) {
+        return (
+            <Popover>
+                <div className={style.tooltip}>Bought</div>
+            </Popover>
+        );
+    }
     return (
         <Popover>
             <PopoverBody>

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import HallRow from './hall-row/HallRow';
 import { ISeat } from '../../services/types';
 import style from './hall.module.scss';
@@ -14,7 +14,19 @@ const checkEmptyRow = (row: ISeat[]): boolean => {
 };
 
 const Hall: FC<IHallProps> = ({ hallData, greedWidth }) => {
+    const [reservedSeatsId, setReservedSeatsId] = useState<string[]>([]);
     const rowCounter = { current: 0 };
+
+    const reserve = (id: string, isReservedSeat = false): void => {
+        if (isReservedSeat) {
+            const updatedArray = reservedSeatsId.filter(
+                (seatId) => seatId !== id
+            );
+            setReservedSeatsId(updatedArray);
+            return;
+        }
+        setReservedSeatsId([...reservedSeatsId, id]);
+    };
 
     return (
         <div className={style.hall}>
@@ -33,7 +45,7 @@ const Hall: FC<IHallProps> = ({ hallData, greedWidth }) => {
                                 {rowCounter.current}
                             </span>
                         )}
-                        {HallRow(row, greedWidth)}
+                        {HallRow(row, greedWidth, reserve, reservedSeatsId)}
                         {!isEmptyRow && (
                             <span className={style.row__title_rt}>
                                 {rowCounter.current}

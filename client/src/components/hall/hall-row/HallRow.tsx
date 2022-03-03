@@ -5,11 +5,49 @@ import { SeatsTypes, seatsTypes } from '../seats-types';
 import { Tooltip } from './Tooltip';
 import style from '../hall.module.scss';
 
-const HallRow = (rowData: ISeat[], greedWidth: number): ReactElement[] => {
+const HallRow = (
+    rowData: ISeat[],
+    greedWidth: number,
+    reserve: (id: string, isReservedSeat: boolean) => void,
+    reservedSeatsId: string[]
+): ReactElement[] => {
     const basis = 100 / greedWidth;
+    let seatIndex = 0;
 
     return rowData.map((seat, index) => {
-        const { size, type } = seat;
+        const { size, type, isBought, _id } = seat;
+
+        const reserved = reservedSeatsId.includes(_id);
+        const reserveSeat = (): void => {
+            reserve(_id, reserved);
+        };
+
+        const showSeat = (): ReactElement => {
+            if (type === SeatsTypes.empty) {
+                return seatsTypes[type];
+            }
+
+            seatIndex += 1;
+            return (
+                <OverlayTrigger
+                    placement="top"
+                    overlay={Tooltip(seatIndex, type, isBought)}
+                >
+                    {isBought ? (
+                        <div className={style.seat_bought}>
+                            {seatsTypes[type]}
+                        </div>
+                    ) : (
+                        <div
+                            className={reserved ? style.seat_reserved : null}
+                            onClick={reserveSeat}
+                        >
+                            {seatsTypes[type]}
+                        </div>
+                    )}
+                </OverlayTrigger>
+            );
+        };
 
         return (
             <div
@@ -17,23 +55,7 @@ const HallRow = (rowData: ISeat[], greedWidth: number): ReactElement[] => {
                 className={style.seat}
                 style={{ flexBasis: `${basis * size}%` }}
             >
-                {type === SeatsTypes.empty ? (
-                    seatsTypes[type]
-                ) : (
-                    <OverlayTrigger
-                        placement="top"
-                        overlay={Tooltip(index + 1, type)}
-                    >
-                        {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
-                        <div
-                            onClick={() => {
-                                console.log(123);
-                            }}
-                        >
-                            {seatsTypes[type]}
-                        </div>
-                    </OverlayTrigger>
-                )}
+                {showSeat()}
             </div>
         );
     });

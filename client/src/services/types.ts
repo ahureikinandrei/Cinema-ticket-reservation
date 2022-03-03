@@ -53,11 +53,18 @@ export interface ICreateSessionData {
 export interface ISeat {
     type: number;
     size: number;
+    isBought: boolean;
+    _id: string;
+}
+
+export interface ICreateSeat {
+    type: number;
+    size: number;
 }
 
 export interface ICreatHallSchemaData {
     name: string;
-    schema: Array<ISeat[]>;
+    schema: Array<ICreateSeat[]>;
     rowSize: number;
 }
 
@@ -75,6 +82,7 @@ export interface IPriceCreateData {
         prime: number;
     };
     seatsStatus: Array<ISeat[]>;
+    rowSize: number;
 }
 
 export interface IPriceData {
@@ -85,4 +93,5 @@ export interface IPriceData {
         prime: number;
     };
     seatsStatus: Array<ISeat[]>;
+    rowSize: number;
 }

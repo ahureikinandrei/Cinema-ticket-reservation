@@ -37,6 +37,9 @@ export class Price {
       isBought: { type: boolean; default: false };
     },
   ];
+
+  @Prop()
+  rowSize: number;
 }
 
 export const PriceSchema = SchemaFactory.createForClass(Price);

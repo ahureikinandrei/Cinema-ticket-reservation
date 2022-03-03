@@ -1,3 +1,4 @@
+@import "./variables";
 html {
   min-height: 100%;
 }
@@ -11,14 +12,14 @@ body {
 .popover-body {
   padding: 0;
   border-radius: 10px;
-  background-color: rgba(80, 79, 79, 0.85);
+  background-color: $tooltip_background;
 }
 
 .bs-popover-top {
   border-radius: 10px;
-  background-color: rgba(80, 79, 79, 0.85);
+  background-color: $tooltip_background;
 }
 
 .bs-popover-top > .popover-arrow::after {
-  border-top-color: rgba(80, 79, 79, 0.85);
+  border-top-color: $tooltip_background;
 }

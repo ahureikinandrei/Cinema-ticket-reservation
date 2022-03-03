@@ -31,7 +31,6 @@ export default class SessionService {
 
     static async getSessionById(id = ''): Promise<AxiosResponse<ISessionData>> {
         const response = await axios.get(ALL_SESSIONS_PATH + id);
-        console.log(response);
         return response;
     }
 

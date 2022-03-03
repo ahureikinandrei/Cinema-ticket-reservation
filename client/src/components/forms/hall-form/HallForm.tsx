@@ -3,14 +3,14 @@ import { Button, ButtonGroup, Dropdown, Form } from 'react-bootstrap';
 import { SEAT_TYPES } from '../../../constants/filmConstants';
 import { SeatModel } from '../../../models/SeatModel';
 import HallGreed from '../../hall/hall-greed/HallGreed';
-import { ISeat } from '../../../services/types';
-import style from './hall-form.module.scss';
+import { ICreateSeat } from '../../../services/types';
 import HallService from '../../../services/hall.service';
+import style from './hall-form.module.scss';
 
 const HallForm: FC = () => {
     const greedData = useRef(1);
     const [error, setError] = useState('');
-    const [greed, setGreed] = useState<Array<ISeat[]>>([]);
+    const [greed, setGreed] = useState<Array<ICreateSeat[]>>([]);
     const [seatType, setSeatType] = useState<string>(SEAT_TYPES[0]);
     const [row, setRow] = useState<number>(1);
     const [seatNumber, setSeatNumber] = useState<number>(1);
@@ -61,9 +61,9 @@ const HallForm: FC = () => {
 
     const addGreed = (): void => {
         greedData.current = row;
-        const newHallData: Array<ISeat[]> = [];
+        const newHallData: Array<ICreateSeat[]> = [];
         for (let i = 0; i < row; i += 1) {
-            const newRow: ISeat[] = [];
+            const newRow: ICreateSeat[] = [];
             for (let k = 0; k < seatNumber; k += 1) {
                 newRow.push(new SeatModel(3));
             }

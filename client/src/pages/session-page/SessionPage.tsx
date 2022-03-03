@@ -38,12 +38,15 @@ const SessionPage: FC = () => {
     return (
         <Container className={style.container}>
             {session ? (
-                <FilmInfo film={session.film} error={error} />
+                <>
+                    <FilmInfo film={session.film} error={error} />
+                    <Hall
+                        hallData={session.price.seatsStatus}
+                        greedWidth={session.price.rowSize}
+                    />
+                </>
             ) : (
                 <Spinner animation="grow" variant="light" />
-            )}
-            {session && (
-                <Hall hallData={session.price.seatsStatus} greedWidth={10} />
             )}
         </Container>
     );

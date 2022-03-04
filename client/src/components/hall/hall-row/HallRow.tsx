@@ -8,7 +8,7 @@ import style from '../hall.module.scss';
 const HallRow = (
     rowData: ISeat[],
     greedWidth: number,
-    reserve: (id: string, isReservedSeat: boolean) => void,
+    reserve: (seat: ISeat, cansel: boolean) => void,
     reservedSeatsId: string[]
 ): ReactElement[] => {
     const basis = 100 / greedWidth;
@@ -19,7 +19,7 @@ const HallRow = (
 
         const reserved = reservedSeatsId.includes(_id);
         const reserveSeat = (): void => {
-            reserve(_id, reserved);
+            reserve(seat, reserved);
         };
 
         const showSeat = (): ReactElement => {

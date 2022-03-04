@@ -75,23 +75,21 @@ export interface IHallData {
     rowSize: number;
 }
 
+export interface ISeatPrice {
+    simple: number;
+    love: number;
+    prime: number;
+}
+
 export interface IPriceCreateData {
-    seatPrice: {
-        simple: number;
-        love: number;
-        prime: number;
-    };
+    seatPrice: ISeatPrice;
     seatsStatus: Array<ISeat[]>;
     rowSize: number;
 }
 
 export interface IPriceData {
     _id: string;
-    seatPrice: {
-        simple: number;
-        love: number;
-        prime: number;
-    };
+    seatPrice: ISeatPrice;
     seatsStatus: Array<ISeat[]>;
     rowSize: number;
 }

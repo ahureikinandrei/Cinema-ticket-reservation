@@ -7,6 +7,7 @@ import { ISessionData } from '../../services/types';
 import Hall from '../../components/hall/Hall';
 import FilmInfo from '../../components/films/film-info/FilmInfo';
 import { UNEXPECTED_ERROR } from '../../constants/messages';
+import HallLegend from '../../components/hall/hall-legend/HallLegend';
 import style from './sessionPage.module.scss';
 
 const SessionPage: FC = () => {
@@ -40,10 +41,13 @@ const SessionPage: FC = () => {
             {session ? (
                 <>
                     <FilmInfo film={session.film} error={error} />
-                    <Hall
-                        hallData={session.price.seatsStatus}
-                        greedWidth={session.price.rowSize}
-                    />
+                    <div className={style.hall_legend}>
+                        <Hall
+                            hallData={session.price.seatsStatus}
+                            greedWidth={session.price.rowSize}
+                        />
+                        <HallLegend seatPrise={session.price.seatPrice} />
+                    </div>
                 </>
             ) : (
                 <Spinner animation="grow" variant="light" />

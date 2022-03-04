@@ -1,8 +1,10 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import HallRow from './hall-row/HallRow';
 import { ISeat } from '../../services/types';
-import style from './hall.module.scss';
 import { SeatsTypes } from './seats-types';
+import { useAction, useAppSelector } from '../../hooks/redux';
+import { selectReservedSeatsId } from '../../redux/order/selectors';
+import style from './hall.module.scss';
 
 interface IHallProps {
     hallData: Array<ISeat[]>;
@@ -14,18 +16,16 @@ const checkEmptyRow = (row: ISeat[]): boolean => {
 };
 
 const Hall: FC<IHallProps> = ({ hallData, greedWidth }) => {
-    const [reservedSeatsId, setReservedSeatsId] = useState<string[]>([]);
+    const { bookSeats, canselBookSeat } = useAction();
+    const reservedSeatsId = useAppSelector(selectReservedSeatsId);
     const rowCounter = { current: 0 };
 
-    const reserve = (id: string, isReservedSeat = false): void => {
-        if (isReservedSeat) {
-            const updatedArray = reservedSeatsId.filter(
-                (seatId) => seatId !== id
-            );
-            setReservedSeatsId(updatedArray);
+    const book = (seat: ISeat, booked = false): void => {
+        if (booked) {
+            canselBookSeat(seat);
             return;
         }
-        setReservedSeatsId([...reservedSeatsId, id]);
+        bookSeats(seat);
     };
 
     return (
@@ -45,7 +45,7 @@ const Hall: FC<IHallProps> = ({ hallData, greedWidth }) => {
                                 {rowCounter.current}
                             </span>
                         )}
-                        {HallRow(row, greedWidth, reserve, reservedSeatsId)}
+                        {HallRow(row, greedWidth, book, reservedSeatsId)}
                         {!isEmptyRow && (
                             <span className={style.row__title_rt}>
                                 {rowCounter.current}

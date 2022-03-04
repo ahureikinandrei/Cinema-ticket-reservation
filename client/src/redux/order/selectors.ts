@@ -1,4 +1,9 @@
 import { RootState } from '../store';
 
-export const getSelectedSeats = (state: RootState): Array<boolean[]> =>
-    state.order.selectedSeats;
+export const selectReservedSeatsId = (state: RootState): string[] => {
+    return state.order.bookedSeats.map(({ _id }) => _id);
+};
+
+export const selectOrderCost = (state: RootState): number => {
+    return state.order.orderCost;
+};

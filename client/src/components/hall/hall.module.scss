@@ -1,8 +1,7 @@
-@import "../../variables";
+@import "../../sass/variables";
 
 .hall {
-  min-width: 200px;
-  max-width: 600px;
+  max-width: 400px;
   color: white;
   border-top: 1px solid white;
   display: flex;
@@ -21,22 +20,18 @@
     align-items: center;
     margin: 1% 0;
 
-    span {
-      width: 10px;
-      margin: 0;
-      font-size: 1rem;
-    }
 
     .row__title_rt {
+
       display: flex;
       justify-content: center;
-      margin-left: 5px;
+      margin: 0 0 0 5px;
     }
 
     .row__title_lf {
       display: flex;
       justify-content: center;
-      margin-right: 5px;
+      margin: 0 5px 0 0;
     }
 
     .seat {

@@ -1,3 +1,5 @@
+@import '../../../sass/variables';
+
 .card {
   width: 160px;
   height: 300px;
@@ -23,7 +25,7 @@
     backface-visibility: hidden;
     border-radius: 10px;
     background-color: #232323;
-    box-shadow: 0 0 10px 3px rgba(153, 51, 204, 1);
+    box-shadow: 0 0 10px 3px $color_border_main;
     overflow: hidden;
   }
 

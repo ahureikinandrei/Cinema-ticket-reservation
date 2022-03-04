@@ -5,7 +5,7 @@ import { SeatModel } from '../../../models/SeatModel';
 import HallGreed from '../../hall/hall-greed/HallGreed';
 import { ICreateSeat } from '../../../services/types';
 import HallService from '../../../services/hall.service';
-import style from './hall-form.module.scss';
+import style from './hallForm.module.scss';
 
 const HallForm: FC = () => {
     const greedData = useRef(1);

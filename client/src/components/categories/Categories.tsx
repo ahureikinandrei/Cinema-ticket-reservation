@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import style from './categories.module.scss';
 import CategoriesForm from '../forms/categories-form/CategoriesForm';
+import style from './categories.module.scss';
 
 const Categories: FC = () => {
     return (

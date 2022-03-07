@@ -1,3 +1,5 @@
+@import "../../sass/mixins";
+
 .container {
   display: flex;
   flex-grow: 1;
@@ -5,8 +7,12 @@
   align-items: center;
 }
 
-.hall_legend {
+.hall {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  @include media-hall-resize {
+    align-items: center;
+    flex-direction: column;
+  }
 }

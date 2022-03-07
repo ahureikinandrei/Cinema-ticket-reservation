@@ -10,7 +10,19 @@ export const GENRES = [
     'romance',
 ];
 
-export const SEAT_TYPES = ['simple', 'love', 'prime', 'empty'];
+export const SEAT_TYPES: Array<'simple' | 'love' | 'prime' | 'empty'> = [
+    'simple',
+    'love',
+    'prime',
+    'empty',
+];
+
+export enum SEAT_TYPES_ENUM {
+    'simple' = 'simple',
+    'love' = 'love',
+    'prime' = 'prime',
+    'empty' = 'empty',
+}
 
 export const ANY_GENRE = 'any';
 

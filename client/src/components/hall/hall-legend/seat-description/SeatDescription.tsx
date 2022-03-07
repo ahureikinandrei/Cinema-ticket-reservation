@@ -3,7 +3,7 @@ import style from '../hallLegend.module.scss';
 
 interface ISeatDescriptionProps {
     type: ReactElement;
-    prise: number;
+    prise: string;
 }
 
 const SeatDescription: FC<ISeatDescriptionProps> = ({

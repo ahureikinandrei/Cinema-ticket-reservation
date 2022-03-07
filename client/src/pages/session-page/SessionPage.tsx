@@ -8,12 +8,15 @@ import Hall from '../../components/hall/Hall';
 import FilmInfo from '../../components/films/film-info/FilmInfo';
 import { UNEXPECTED_ERROR } from '../../constants/messages';
 import HallLegend from '../../components/hall/hall-legend/HallLegend';
+import { useAppSelector } from '../../hooks/redux';
+import { selectOrderCost } from '../../redux/order/selectors';
 import style from './sessionPage.module.scss';
 
 const SessionPage: FC = () => {
     const { id } = useParams();
     const [session, setSession] = useState<ISessionData | null>(null);
     const [error, setError] = useState<string>('');
+    const orderCost = useAppSelector(selectOrderCost);
 
     const getSession = async (): Promise<void> => {
         try {
@@ -41,12 +44,16 @@ const SessionPage: FC = () => {
             {session ? (
                 <>
                     <FilmInfo film={session.film} error={error} />
-                    <div className={style.hall_legend}>
+                    <div className={style.hall}>
                         <Hall
                             hallData={session.price.seatsStatus}
                             greedWidth={session.price.rowSize}
+                            seatPrise={session.price.seatPrice}
                         />
-                        <HallLegend seatPrise={session.price.seatPrice} />
+                        <HallLegend
+                            seatPrise={session.price.seatPrice}
+                            orderCost={orderCost}
+                        />
                     </div>
                 </>
             ) : (

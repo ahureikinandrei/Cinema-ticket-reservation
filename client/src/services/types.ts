@@ -76,9 +76,9 @@ export interface IHallData {
 }
 
 export interface ISeatPrice {
-    simple: number;
-    love: number;
-    prime: number;
+    simple: string;
+    love: string;
+    prime: string;
 }
 
 export interface IPriceCreateData {

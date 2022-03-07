@@ -1,30 +1,42 @@
 import React, { FC } from 'react';
 import HallRow from './hall-row/HallRow';
-import { ISeat } from '../../services/types';
+import { ISeat, ISeatPrice } from '../../services/types';
 import { SeatsTypes } from './seats-types';
 import { useAction, useAppSelector } from '../../hooks/redux';
 import { selectReservedSeatsId } from '../../redux/order/selectors';
+import { SEAT_TYPES, SEAT_TYPES_ENUM } from '../../constants/filmConstants';
 import style from './hall.module.scss';
 
 interface IHallProps {
     hallData: Array<ISeat[]>;
     greedWidth: number;
+    seatPrise: ISeatPrice;
 }
 
 const checkEmptyRow = (row: ISeat[]): boolean => {
     return row.every(({ type }) => type === SeatsTypes.empty);
 };
 
-const Hall: FC<IHallProps> = ({ hallData, greedWidth }) => {
-    const { bookSeats, canselBookSeat } = useAction();
+const Hall: FC<IHallProps> = ({ hallData, greedWidth, seatPrise }) => {
+    const { bookSeats, canselBookSeat, addOrderCost, subtractOrderCost } =
+        useAction();
     const reservedSeatsId = useAppSelector(selectReservedSeatsId);
     const rowCounter = { current: 0 };
 
     const book = (seat: ISeat, booked = false): void => {
+        const seatTypeName = SEAT_TYPES[seat.type];
+        if (seatTypeName === SEAT_TYPES_ENUM.empty) {
+            return;
+        }
+
+        const price = seatPrise[seatTypeName];
+
         if (booked) {
+            subtractOrderCost(+price);
             canselBookSeat(seat);
             return;
         }
+        addOrderCost(+price);
         bookSeats(seat);
     };
 

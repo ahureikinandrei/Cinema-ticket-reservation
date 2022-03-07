@@ -6,16 +6,20 @@ import style from './hallLegend.module.scss';
 
 interface IHallLegendProps {
     seatPrise: ISeatPrice;
+    orderCost: number;
 }
 
-const HallLegend: FC<IHallLegendProps> = ({ seatPrise }) => {
+const HallLegend: FC<IHallLegendProps> = ({ seatPrise, orderCost }) => {
     const [simple, love, prime] = seatsTypes;
 
     return (
         <div className={style.wrapper}>
-            <div>
-                <h4>Seats types</h4>
-                <span>Total Cost: 1</span>
+            <div className="d-flex">
+                <div>
+                    <h4>Seats types</h4>
+                    <span>Total Cost: {orderCost}</span>
+                </div>
+                <button className={style.button_buy}>Buy</button>
             </div>
             <SeatDescription type={simple} prise={seatPrise.simple}>
                 <div className={style.description__text}>
@@ -31,6 +35,20 @@ const HallLegend: FC<IHallLegendProps> = ({ seatPrise }) => {
                     viewings. The price is for a double bed.
                 </div>
             </SeatDescription>
+            <SeatDescription type={prime} prise={seatPrise.prime}>
+                <div className={style.description__text}>
+                    Double soft sofas with headrests. The comfort of this chair
+                    will instantly make you relax and feel at home. The price is
+                    for a double bed
+                </div>
+            </SeatDescription>{' '}
+            <SeatDescription type={prime} prise={seatPrise.prime}>
+                <div className={style.description__text}>
+                    Double soft sofas with headrests. The comfort of this chair
+                    will instantly make you relax and feel at home. The price is
+                    for a double bed
+                </div>
+            </SeatDescription>{' '}
             <SeatDescription type={prime} prise={seatPrise.prime}>
                 <div className={style.description__text}>
                     Double soft sofas with headrests. The comfort of this chair

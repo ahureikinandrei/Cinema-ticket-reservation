@@ -1,0 +1,37 @@
+@import "../../../sass/variables";
+
+.session {
+
+  padding: 10px;
+  text-decoration: none;
+  z-index: 1;
+
+  &__body {
+    $border: 5px;
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    color: $color-text;
+    background-color: $color_gray;
+    background-clip: padding-box;
+    border: solid $border transparent;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 3px $color_border_main;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: -1;
+      margin: -$border;
+      border-radius: inherit;
+      background: $color_border_gradient;
+    }
+  }
+}
+

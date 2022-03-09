@@ -1,0 +1,15 @@
+@import '../../../sass/variables';
+
+.seatInfo {
+  display: flex;
+  padding: 10px;
+  flex-direction: column;
+  align-items: flex-start;
+  border: 1px solid $color_border_main;
+  border-radius: 10px;
+  margin: 10px 0;
+
+  .type {
+
+  }
+}

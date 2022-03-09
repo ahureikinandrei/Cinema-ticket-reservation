@@ -5,6 +5,7 @@
   width: 40%;
   padding-left: 40px;
   color: $color-text;
+  z-index: 1;
   @include media-hall-resize {
     margin-top: 20px;
     padding-left: 0;
@@ -12,21 +13,19 @@
   }
 
   .button_buy {
-    width: 50px;
+    width: 150px;
     margin-left: auto;
-    margin-right: calc(50% - 25px);
+    margin-right: calc(50% - 75px);
     align-self: center;
     $border: 5px;
     position: relative;
     box-sizing: border-box;
     color: $color-text;
-    background: white;
-    //background-color: $color_gray;
+    background-color: $color_gray;
     background-clip: padding-box;
     border: solid $border transparent;
     border-radius: 10px;
     box-shadow: 0 0 10px 3px $color_border_main;
-    z-index: 1;
 
     &:before {
       content: '';

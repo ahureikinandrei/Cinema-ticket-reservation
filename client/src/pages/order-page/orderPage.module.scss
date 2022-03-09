@@ -1,0 +1,43 @@
+@import "../../sass/variables";
+@import "../../sass/mixins";
+@import "../../sass/variables";
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: center;
+  align-self: center;
+  z-index: 1;
+  color: $color-text;
+  text-align: center;
+}
+
+.button_buy {
+  width: 150px;
+  margin-left: auto;
+  margin-right: calc(50% - 75px);
+  align-self: center;
+  $border: 5px;
+  position: relative;
+  box-sizing: border-box;
+  color: $color-text;
+  background-color: $color_gray;
+  background-clip: padding-box;
+  border: solid $border transparent;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 3px $color_border_main;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    margin: -$border;
+    border-radius: inherit;
+    background: $color_border_gradient;
+  }
+}

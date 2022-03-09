@@ -4,12 +4,14 @@ import { ISeat } from '../../../services/types';
 import { SeatsTypes, seatsTypes } from '../seats-types';
 import { Tooltip } from './Tooltip';
 import style from '../hall.module.scss';
+import { ISeatFullInfo } from '../../../redux/order/reducer';
 
 const HallRow = (
     rowData: ISeat[],
     greedWidth: number,
-    reserve: (seat: ISeat, cansel: boolean) => void,
-    reservedSeatsId: string[]
+    reserve: (seat: ISeatFullInfo, cansel: boolean) => void,
+    reservedSeatsId: string[],
+    rowIndex: number
 ): ReactElement[] => {
     const basis = 100 / greedWidth;
     let seatIndex = 0;
@@ -19,7 +21,12 @@ const HallRow = (
 
         const reserved = reservedSeatsId.includes(_id);
         const reserveSeat = (): void => {
-            reserve(seat, reserved);
+            const fullSeatInfo = {
+                ...seat,
+                row: rowIndex,
+                seat: index + 1,
+            };
+            reserve(fullSeatInfo, reserved);
         };
 
         const showSeat = (): ReactElement => {

@@ -21,7 +21,6 @@ const SessionList: FC<ISessionListProps> = ({ sessions }) => {
                         as={Link}
                         to={`/session/${_id}`}
                         className={style.session}
-                        replace
                     >
                         <div className={style.session__body}>
                             <span>{date}</span>

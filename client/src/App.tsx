@@ -8,9 +8,10 @@ import FilmsPage from './pages/films-page/FilmsPage';
 import Alert from './components/alert/Alert';
 import { AdminRouter } from './routes/AdminRoute';
 
-import './App.scss';
-import FilmPage from './pages/film-page/FIlmPage';
+import FilmPage from './pages/film-page/FilmPage';
 import SessionPage from './pages/session-page/SessionPage';
+import OrderPage from './pages/order-page/OrderPage';
+import './App.scss';
 
 const App: FC = () => {
     const { authUser } = useAction();
@@ -27,6 +28,7 @@ const App: FC = () => {
             <Header />
             <Routes>
                 <Route path="/" element={<FilmsPage />} />
+                <Route path="/order" element={<OrderPage />} />
                 <Route path="/film/:id" element={<FilmPage />} />
                 <Route path="/session/:id" element={<SessionPage />} />
                 <Route

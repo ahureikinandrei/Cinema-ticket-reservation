@@ -6,6 +6,7 @@ import { useAction, useAppSelector } from '../../hooks/redux';
 import { selectReservedSeatsId } from '../../redux/order/selectors';
 import { SEAT_TYPES, SEAT_TYPES_ENUM } from '../../constants/filmConstants';
 import style from './hall.module.scss';
+import { ISeatFullInfo } from '../../redux/order/reducer';
 
 interface IHallProps {
     hallData: Array<ISeat[]>;
@@ -23,7 +24,7 @@ const Hall: FC<IHallProps> = ({ hallData, greedWidth, seatPrise }) => {
     const reservedSeatsId = useAppSelector(selectReservedSeatsId);
     const rowCounter = { current: 0 };
 
-    const book = (seat: ISeat, booked = false): void => {
+    const book = (seat: ISeatFullInfo, booked = false): void => {
         const seatTypeName = SEAT_TYPES[seat.type];
         if (seatTypeName === SEAT_TYPES_ENUM.empty) {
             return;
@@ -57,7 +58,13 @@ const Hall: FC<IHallProps> = ({ hallData, greedWidth, seatPrise }) => {
                                 {rowCounter.current}
                             </span>
                         )}
-                        {HallRow(row, greedWidth, book, reservedSeatsId)}
+                        {HallRow(
+                            row,
+                            greedWidth,
+                            book,
+                            reservedSeatsId,
+                            rowCounter.current
+                        )}
                         {!isEmptyRow && (
                             <span className={style.row__title_rt}>
                                 {rowCounter.current}

@@ -1,5 +1,6 @@
 @import "sass/variables";
 @import "sass/placeholder";
+
 html {
   min-height: 100%;
   @extend %custom-scroll;
@@ -25,3 +26,31 @@ body {
 .bs-popover-top > .popover-arrow::after {
   border-top-color: $tooltip_background;
 }
+
+.page-item {
+  border-radius: 50%;
+  margin-right: 5px;
+
+  .page-link {
+    border-radius: 50%;
+  }
+
+  &:last-child .page-link,
+  &:first-child .page-link {
+    border-radius: 50%;
+    background: $tooltip_background;
+    border: 3px solid $color_border_main;
+    color: white;
+  }
+
+  &.active,
+  &.active:first-child .page-link,
+  &.active:first-child .page-link, {
+    .page-link {
+      background: $seat_bought;
+      box-shadow: 0 0 10px 3px $color_border_main;
+    }
+  }
+}
+
+

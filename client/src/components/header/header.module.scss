@@ -1,5 +1,18 @@
+@import "../../sass/variables";
+@import "../../sass/mixins";
+
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.logo {
+  margin-right: auto;
+  .logo__text {
+    @include media-mobile {
+      font-size: 0.75rem;
+      //display: none;
+    }
+  }
 }

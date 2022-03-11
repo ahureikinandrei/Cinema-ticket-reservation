@@ -3,16 +3,17 @@ import { Route, Routes } from 'react-router-dom';
 import { useAction } from './hooks/redux';
 import LocalStorageService from './services/localStorage.service';
 import Header from './components/header/Header';
+import Alert from './components/alert/Alert';
 import AdminPage from './pages/admin-page/AdminPage';
 import FilmsPage from './pages/films-page/FilmsPage';
-import Alert from './components/alert/Alert';
-import { AdminRouter } from './routes/AdminRoute';
-
 import FilmPage from './pages/film-page/FilmPage';
 import SessionPage from './pages/session-page/SessionPage';
 import OrderPage from './pages/order-page/OrderPage';
-import './App.scss';
 import ErrorPage from './pages/error-page/ErrorPage';
+import ProfilePage from './pages/profile-page/ProfilePage';
+import { AdminRouter } from './routes/AdminRoute';
+import { PrivateRouter } from './routes/PrivateRouter';
+import './App.scss';
 
 const App: FC = () => {
     const { authUser } = useAction();
@@ -38,6 +39,14 @@ const App: FC = () => {
                         <AdminRouter>
                             <AdminPage />
                         </AdminRouter>
+                    }
+                />
+                <Route
+                    path="/profile"
+                    element={
+                        <PrivateRouter>
+                            <ProfilePage />
+                        </PrivateRouter>
                     }
                 />
                 <Route path="*" element={<ErrorPage />} />

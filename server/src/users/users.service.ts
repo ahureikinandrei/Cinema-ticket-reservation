@@ -25,6 +25,10 @@ export class UsersService {
     return this.userModel.findOne({ email }).exec();
   }
 
+  async getUser(id: mongoose.Schema.Types.ObjectId) {
+    return this.userModel.findById(id).exec();
+  }
+
   async addRole(dto: AddRoleDto) {
     const user = await this.userModel.findById(dto.userId);
     const role = dto.value;

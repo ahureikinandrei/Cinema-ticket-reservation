@@ -6,6 +6,7 @@ interface ILink {
 interface ILinkList {
     admin: ILink[];
     navigate: ILink[];
+    auth: ILink[];
 }
 
 export const linkList: ILinkList = {
@@ -19,6 +20,12 @@ export const linkList: ILinkList = {
         {
             path: './',
             name: 'Home',
+        },
+    ],
+    auth: [
+        {
+            path: './profile',
+            name: 'Profile',
         },
     ],
 };

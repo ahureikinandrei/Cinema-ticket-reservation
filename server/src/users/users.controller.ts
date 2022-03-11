@@ -5,6 +5,7 @@ import {
   Get,
   UseGuards,
   UsePipes,
+  Req,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -14,6 +15,8 @@ import { RolesGuard } from '../auth/roles.guard';
 import { Role } from '../auth/roles-auth.decorator';
 import { Roles } from './types/roles.enum';
 import { ValidationPipe } from '../pipes/validation.pipe';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { IReqWhitUser } from '../orders/types';
 
 @Controller('users')
 export class UsersController {
@@ -30,6 +33,13 @@ export class UsersController {
   @Get()
   getAll() {
     return this.usersService.getAllUsers();
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get()
+  getUser(@Req() req: IReqWhitUser) {
+    const { user } = req;
+    const { id } = user;
   }
 
   @Role(Roles.Admin)

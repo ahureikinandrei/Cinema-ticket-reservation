@@ -5,6 +5,8 @@ import { Model } from 'mongoose';
 import { CreateUserDto } from './dto/create-user.dto';
 import { AddRoleDto } from './dto/add-role.dto';
 import { DeleteUserDto } from './dto/delete-uset.dto';
+import * as mongoose from 'mongoose';
+import { Order } from '../orders/schemas/order.schema';
 
 @Injectable()
 export class UsersService {
@@ -47,5 +49,13 @@ export class UsersService {
     }
 
     return user.remove();
+  }
+
+  async addOrder(userID: mongoose.Schema.Types.ObjectId, order: Order) {
+    const user = await this.userModel.findById(userID);
+    user.orders.push(order);
+    await user.save();
+
+    return user;
   }
 }

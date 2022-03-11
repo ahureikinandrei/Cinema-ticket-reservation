@@ -15,5 +15,6 @@ import { Price, PriceSchema } from './schemas/price.schema';
   ],
   controllers: [PricesController],
   providers: [PricesService],
+  exports: [PricesService],
 })
 export class PricesModule {}

@@ -1,0 +1,10 @@
+@import '../../sass/variables';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: $color-text;
+  flex-grow: 1;
+}

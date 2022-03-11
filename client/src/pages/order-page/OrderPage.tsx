@@ -4,15 +4,21 @@ import { useAppSelector } from '../../hooks/redux';
 import {
     selectOrderCost,
     selectReservedSeats,
+    selectSessionId,
 } from '../../redux/order/selectors';
 import OrderSeat from '../../components/order/order-seat/OrderSeat';
 import { getIsUserAuth, getUserEmail } from '../../redux/users/selectors';
 import style from './orderPage.module.scss';
 import AuthModal from '../../components/modal/auth-modal/AuthModal';
+import OrderService from '../../services/order.service';
+import SessionService from '../../services/session.service';
+import { isString } from '../../utils/types';
 
 const OrderPage: FC = () => {
     const [authModalState, setAuthModalState] = useState<boolean>(false);
+    const [isLoading, setLoading] = useState<boolean>(false);
     const selectedSeats = useAppSelector(selectReservedSeats);
+    const sessionId = useAppSelector(selectSessionId);
     const isAuth = useAppSelector(getIsUserAuth);
     const orderCost = useAppSelector(selectOrderCost);
     const email = useAppSelector(getUserEmail);
@@ -24,12 +30,31 @@ const OrderPage: FC = () => {
         }
     });
 
-    const buy = (): void => {
+    const buy = async (): Promise<void> => {
         if (!isAuth) {
             setAuthModalState(true);
             return;
         }
-        console.log(selectedSeats);
+
+        if (!sessionId) {
+            return;
+        }
+        setLoading(true);
+        const session = await SessionService.getSessionById(sessionId);
+
+        const order = await OrderService.createOrder(
+            selectedSeats,
+            sessionId,
+            session.data.price._id
+        );
+
+        if (isString(order)) {
+            navigate(`/error`);
+            return;
+        }
+
+        setLoading(false);
+        navigate(`/session/${sessionId}`);
     };
 
     const closeModal = (): void => {
@@ -44,8 +69,12 @@ const OrderPage: FC = () => {
             {selectedSeats.map(({ row, seat, _id }) => (
                 <OrderSeat row={row} seat={seat} key={_id} />
             ))}
-            <button className={style.button_buy} onClick={buy}>
-                Buy
+            <button
+                className={style.button_buy}
+                onClick={buy}
+                disabled={isLoading}
+            >
+                {isLoading ? '...' : 'Buy'}
             </button>
         </div>
     );

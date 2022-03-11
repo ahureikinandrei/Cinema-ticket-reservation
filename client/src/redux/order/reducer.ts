@@ -40,10 +40,12 @@ const orderSlice = createSlice({
             );
         },
         addOrderCost(state, action: PayloadAction<number>) {
-            state.orderCost += action.payload;
+            const newOrderCost = state.orderCost + action.payload;
+            state.orderCost = parseFloat(newOrderCost.toFixed(2));
         },
         subtractOrderCost(state, action: PayloadAction<number>) {
-            state.orderCost -= action.payload;
+            const newOrderCost = state.orderCost - action.payload;
+            state.orderCost = parseFloat(newOrderCost.toFixed(2));
         },
         setSessionId(state, action: PayloadAction<string>) {
             state.sessionId = action.payload;

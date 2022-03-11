@@ -10,7 +10,7 @@ interface ISessionListProps {
 
 const SessionList: FC<ISessionListProps> = ({ sessions }) => {
     return (
-        <Row xs={2} md={4} lg={5}>
+        <Row xs={2} md={4} lg={5} className="w-100">
             {sessions.map((session) => {
                 const { date, time, _id, cinema } = session;
                 const { name, city } = cinema;

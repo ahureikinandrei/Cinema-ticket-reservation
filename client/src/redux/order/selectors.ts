@@ -11,6 +11,10 @@ export const selectReservedSeatsId = createSelector(
     }
 );
 
+export const selectSessionId = (state: RootState): string | null => {
+    return state.order.sessionId;
+};
+
 export const selectReservedSeats = createSelector(
     selectSelf,
     (state: RootState): ISeatFullInfo[] => {

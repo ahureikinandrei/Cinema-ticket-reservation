@@ -9,7 +9,6 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { CinemaModule } from './cinema/cinema.module';
 import { SessionsModule } from './sessions/sessions.module';
 import { HallModule } from './hall/hall.module';
-import { SolidSeatsModule } from './silid-seats/solid-seats.module';
 import { PricesModule } from './prices/prices.module';
 import * as path from 'path';
 
@@ -31,7 +30,6 @@ import * as path from 'path';
     CinemaModule,
     SessionsModule,
     HallModule,
-    SolidSeatsModule,
     PricesModule,
   ],
 })

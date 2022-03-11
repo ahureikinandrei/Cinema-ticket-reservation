@@ -12,6 +12,7 @@ import FilmPage from './pages/film-page/FilmPage';
 import SessionPage from './pages/session-page/SessionPage';
 import OrderPage from './pages/order-page/OrderPage';
 import './App.scss';
+import ErrorPage from './pages/error-page/ErrorPage';
 
 const App: FC = () => {
     const { authUser } = useAction();
@@ -39,14 +40,7 @@ const App: FC = () => {
                         </AdminRouter>
                     }
                 />
-                <Route
-                    path="*"
-                    element={
-                        <div>
-                            404 <br /> Page not found
-                        </div>
-                    }
-                />
+                <Route path="*" element={<ErrorPage />} />
             </Routes>
             <Alert />
         </div>

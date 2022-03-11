@@ -13,9 +13,9 @@ export class Price {
     }),
   )
   seatPrice: {
-    simple: { type: string };
-    love: { type: string };
-    prime: { type: string };
+    simple: number;
+    love: number;
+    prime: number;
   };
 
   @Prop([
@@ -30,13 +30,15 @@ export class Price {
       },
     ],
   ])
-  seatsStatus: [
-    {
-      type: { type: string };
-      size: number;
-      isBought: { type: boolean; default: false };
-    },
-  ];
+  seatsStatus: Array<
+    [
+      {
+        type: { type: string };
+        size: number;
+        isBought: boolean;
+      },
+    ]
+  >;
 
   @Prop()
   rowSize: number;

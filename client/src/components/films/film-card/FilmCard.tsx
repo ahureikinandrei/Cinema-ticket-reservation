@@ -30,7 +30,7 @@ const FilmCard: FC<IFilmCardProps> = ({ film }) => {
     };
 
     return (
-        <Col md={4} className="mt-3 d-flex justify-content-center">
+        <Col xs={6} md={4} className="mt-3 d-flex justify-content-center">
             {/* eslint-disable-next-line jsx-a11y/interactive-supports-focus */}
             <div role="button" className={style.card} onClick={onCardClick}>
                 <FrontSide

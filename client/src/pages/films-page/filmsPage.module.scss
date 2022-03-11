@@ -10,3 +10,9 @@
   background-repeat: no-repeat;
   background-image: url(../../assets/images/rows-of-red-seats.jpg);
 }
+
+.wrapper {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+}

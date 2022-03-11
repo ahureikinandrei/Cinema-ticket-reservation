@@ -48,7 +48,7 @@ const FilmsPage: FC = () => {
 
     return (
         <main className={style.content}>
-            <Container className="d-flex flex-grow-1 flex-column">
+            <Container className={style.wrapper}>
                 <Row className="d-flex flex-column flex-grow-1">
                     <Row className="d-flex justify-content-center">
                         <SearchInput />

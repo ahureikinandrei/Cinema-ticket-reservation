@@ -12,7 +12,6 @@ import OrderPage from './pages/order-page/OrderPage';
 import ErrorPage from './pages/error-page/ErrorPage';
 import ProfilePage from './pages/profile-page/ProfilePage';
 import { AdminRouter } from './routes/AdminRoute';
-import { PrivateRouter } from './routes/PrivateRouter';
 import './App.scss';
 
 const App: FC = () => {
@@ -41,14 +40,7 @@ const App: FC = () => {
                         </AdminRouter>
                     }
                 />
-                <Route
-                    path="/profile"
-                    element={
-                        <PrivateRouter>
-                            <ProfilePage />
-                        </PrivateRouter>
-                    }
-                />
+                <Route path="/profile/:id" element={<ProfilePage />} />
                 <Route path="*" element={<ErrorPage />} />
             </Routes>
             <Alert />

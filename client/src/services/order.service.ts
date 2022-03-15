@@ -2,12 +2,8 @@ import { AxiosResponse } from 'axios';
 import axios from '../core/axios';
 import { ORDER_CREATE_PATH } from '../constants/routes';
 import { UNEXPECTED_ERROR } from '../constants/messages';
+import { IOrder } from './types';
 import { ISeatFullInfo } from '../redux/order/reducer';
-
-interface IOrder {
-    session: string;
-    seats: ISeatFullInfo[];
-}
 
 export default class OrderService {
     static async createOrder(
@@ -16,7 +12,7 @@ export default class OrderService {
         priceID: string
     ): Promise<AxiosResponse<IOrder> | string> {
         const dto = {
-            sessionID,
+            session: sessionID,
             seats: data,
             priceID,
         };

@@ -15,7 +15,7 @@
   .button_buy {
     width: 150px;
     margin-left: auto;
-    margin-right: calc(50% - 75px);
+    margin-right: calc(35% - 75px);
     align-self: center;
     $border: 5px;
     position: relative;
@@ -26,6 +26,9 @@
     border: solid $border transparent;
     border-radius: 10px;
     box-shadow: 0 0 10px 3px $color_border_main;
+    @include media-hall-resize {
+      margin-right: calc(50% - 75px);
+    }
 
     &:before {
       content: '';

@@ -26,7 +26,20 @@ export class UsersService {
   }
 
   async getUser(id: mongoose.Schema.Types.ObjectId) {
-    return this.userModel.findById(id).exec();
+    return this.userModel.findById(id).populate({
+      path: 'orders',
+      populate: {
+        path: 'session',
+        populate: [
+          {
+            path: 'cinema',
+          },
+          {
+            path: 'film',
+          },
+        ],
+      },
+    });
   }
 
   async addRole(dto: AddRoleDto) {

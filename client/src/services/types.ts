@@ -1,4 +1,5 @@
 import { IUser } from '../models/IUser';
+import { ISeatFullInfo } from '../redux/order/reducer';
 
 export interface IAuthData {
     user: IUser;
@@ -92,4 +93,15 @@ export interface IPriceData {
     seatPrice: ISeatPrice;
     seatsStatus: Array<ISeat[]>;
     rowSize: number;
+}
+
+export interface IOrder {
+    session: string;
+    seats: ISeatFullInfo[];
+}
+
+export interface IOrderResponse {
+    _id: string;
+    session: ISessionData;
+    seats: ISeatFullInfo[];
 }

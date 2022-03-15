@@ -9,10 +9,17 @@
 
 .logo {
   margin-right: auto;
+
   .logo__text {
+    color: $color-text;
+    text-decoration: none;
     @include media-mobile {
       font-size: 0.75rem;
-      //display: none;
     }
+  }
+
+  &:hover,
+  &:focus {
+    color: $color-text;
   }
 }

@@ -2,7 +2,7 @@ import axios from '../core/axios';
 import { IPriceCreateData, IPriceData } from './types';
 import { PRICE_CREATE_PATH } from '../constants/routes';
 
-export default class PriceServiceService {
+export default class PriceService {
     static async createPrice(
         priceData: IPriceCreateData
     ): Promise<string | null> {

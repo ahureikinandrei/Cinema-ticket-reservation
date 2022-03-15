@@ -10,9 +10,9 @@ const Header: FC = () => (
     <Navbar bg="dark">
         <Container>
             <div className={style.logo}>
-                <Navbar.Brand as={Link} to="/" className={style.logo__text}>
+                <Link to="/" className={style.logo__text}>
                     Cinema Ticket
-                </Navbar.Brand>
+                </Link>
             </div>
             <Navigation />
             <AuthButton />

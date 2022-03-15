@@ -12,19 +12,19 @@ interface ILinkList {
 export const linkList: ILinkList = {
     admin: [
         {
-            path: 'create',
+            path: '/create',
             name: 'Create',
         },
     ],
     navigate: [
         {
-            path: './',
+            path: '/',
             name: 'Home',
         },
     ],
     auth: [
         {
-            path: './profile',
+            path: '/profile',
             name: 'Profile',
         },
     ],

@@ -9,7 +9,7 @@ import { ICinemaData, IFilm, IHallData } from '../../../services/types';
 import { getDateToISO, getTimeToISO } from '../../../utils/utils';
 import { UNEXPECTED_ERROR } from '../../../constants/messages';
 import HallService from '../../../services/hall.service';
-import PriceServiceService from '../../../services/price.service';
+import PriceService from '../../../services/price.service';
 
 const SessionForm: FC = () => {
     const { setAppMessage } = useAction();
@@ -41,7 +41,7 @@ const SessionForm: FC = () => {
             return;
         }
 
-        const priceDocumentId = await PriceServiceService.createPrice({
+        const priceDocumentId = await PriceService.createPrice({
             seatPrice: {
                 simple: simpleSeatPrice,
                 love: loveSeatPrice,

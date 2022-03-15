@@ -5,7 +5,7 @@ import {
   Get,
   UseGuards,
   UsePipes,
-  Req,
+  Param,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -16,11 +16,17 @@ import { Role } from '../auth/roles-auth.decorator';
 import { Roles } from './types/roles.enum';
 import { ValidationPipe } from '../pipes/validation.pipe';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { IReqWhitUser } from '../orders/types';
+import { ObjectId } from 'mongoose';
 
 @Controller('users')
 export class UsersController {
   constructor(private usersService: UsersService) {}
+
+  @UseGuards(JwtAuthGuard)
+  @Get('/:id')
+  getUser(@Param('id') id: ObjectId) {
+    return this.usersService.getUser(id);
+  }
 
   @UsePipes(ValidationPipe)
   @Post()
@@ -33,13 +39,6 @@ export class UsersController {
   @Get()
   getAll() {
     return this.usersService.getAllUsers();
-  }
-
-  @UseGuards(JwtAuthGuard)
-  @Get()
-  getUser(@Req() req: IReqWhitUser) {
-    const { user } = req;
-    const { id } = user;
   }
 
   @Role(Roles.Admin)

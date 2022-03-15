@@ -9,6 +9,7 @@
   &__body {
     $border: 5px;
     position: relative;
+    height: 100%;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;

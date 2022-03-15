@@ -19,3 +19,5 @@ export const ALL_HALL_PATH = '/hall/';
 export const PRICE_CREATE_PATH = 'prices/create';
 
 export const ORDER_CREATE_PATH = 'orders/create';
+
+export const USER_GET_BY_ID_PATH = 'users/';

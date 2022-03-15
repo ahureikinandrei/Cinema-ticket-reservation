@@ -58,4 +58,19 @@ body {
   }
 }
 
+.navbar-light .navbar-nav .nav-link {
+  color: $color-text;
+  border-radius: 5px;
+}
+
+.navbar-light .navbar-nav .nav-link.active, {
+  background: $color_border_gradient;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.navbar-light .navbar-nav .nav-link:hover, {
+  color: $color_border_main;
+}
+
 

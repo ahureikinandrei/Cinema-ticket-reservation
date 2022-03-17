@@ -2,19 +2,22 @@ import React, { ChangeEvent, FC, FormEvent, useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import { Button, Dropdown } from 'react-bootstrap';
 import { ANY_GENRE, GENRES } from '../../../constants/filmConstants';
-import { AGE_CATEGORIES } from '../../../constants/searchCategories';
 import { useAction } from '../../../hooks/redux';
+import style from './categoriseForm.module.scss';
 
 const CategoriesForm: FC = () => {
     const [selectedGenre, setGenreState] = useState('any');
-    const [selectedAge, setAge] = useState(0);
     const [selectedRating, setRatingState] = useState(0);
-    const { setAgeRating, setGenre, setRating } = useAction();
+    const [selectedCity, setCityState] = useState('');
+    const [selectedCinema, setCinemaState] = useState('');
+    const { setGenre, setRating, setCity, setCinema } = useAction();
 
     const onCategoriesChange = (event: FormEvent): void => {
         event.preventDefault();
-        setAgeRating(selectedAge);
+
+        setCity(selectedCity.trim());
         setRating(selectedRating);
+        setCinema(selectedCinema.trim());
 
         const genre = selectedGenre === ANY_GENRE ? '' : selectedGenre;
         setGenre(genre);
@@ -24,9 +27,25 @@ const CategoriesForm: FC = () => {
         setRatingState(Number(event.target.value));
     };
 
+    const changeCity = (event: ChangeEvent<HTMLInputElement>): void => {
+        setCityState(event.target.value);
+    };
+
+    const changeCinema = (event: ChangeEvent<HTMLInputElement>): void => {
+        setCinemaState(event.target.value);
+    };
+
     return (
         <Form onSubmit={onCategoriesChange}>
-            <Form.Label className="mt-3">Genre</Form.Label>
+            <Form.Group className={style.category__item}>
+                <Form.Label>City</Form.Label>
+                <Form.Control value={selectedCity} onChange={changeCity} />
+            </Form.Group>
+            <Form.Group className={style.category__item}>
+                <Form.Label>Cinema</Form.Label>
+                <Form.Control value={selectedCinema} onChange={changeCinema} />
+            </Form.Group>
+            <Form.Label className={style.category__item}>Genre</Form.Label>
             <Dropdown>
                 <Dropdown.Toggle variant="secondary" size="sm">
                     {selectedGenre || 'Genre'}
@@ -42,31 +61,19 @@ const CategoriesForm: FC = () => {
                     ))}
                 </Dropdown.Menu>
             </Dropdown>
-            <Form.Label className="mt-3">Age</Form.Label>
-            {AGE_CATEGORIES.map((age, index) => (
-                <Form.Check
-                    checked={selectedAge === index}
-                    name="Age"
-                    key={age}
-                    type="radio"
-                    label={age}
-                    aria-label="All ages"
-                    onChange={() => {
-                        setAge(index);
-                    }}
+            <Form.Group className={style.category__rating}>
+                <Form.Label>Rating</Form.Label>
+                <Form.Control
+                    value={selectedRating}
+                    type="number"
+                    onChange={changeRating}
+                    required
+                    min={0}
+                    max={5}
+                    step={0.1}
+                    size="sm"
                 />
-            ))}
-            <Form.Label className="mt-3">Rating</Form.Label>
-            <Form.Control
-                value={selectedRating}
-                type="number"
-                onChange={changeRating}
-                placeholder="Age"
-                required
-                min={0}
-                max={5}
-                step={0.1}
-            />
+            </Form.Group>
             <Button type="submit" className="mt-3" variant="outline-light">
                 Search
             </Button>

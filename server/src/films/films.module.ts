@@ -5,6 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { Film, FilmSchema } from './schemas/film.schema';
 import { AuthModule } from '../auth/auth.module';
 import { FilesModule } from '../files/files.module';
+import { SessionsModule } from '../sessions/sessions.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { FilesModule } from '../files/files.module';
     ]),
     AuthModule,
     FilesModule,
+    SessionsModule,
   ],
   controllers: [FilmsController],
   providers: [FilmsService],

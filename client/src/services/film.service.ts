@@ -8,6 +8,7 @@ import {
 import { UNEXPECTED_ERROR } from '../constants/messages';
 import { IFilm, IFilmsWithPagination } from './types';
 import { ISearchState } from '../redux/search-films/reducer';
+import { FilmDto } from './film.dto';
 
 export default class FilmService {
     static async createFilm(filmData: FormData): Promise<string | null> {
@@ -30,16 +31,8 @@ export default class FilmService {
         limit: number,
         searchParams: ISearchState
     ): Promise<AxiosResponse<IFilmsWithPagination>> {
-        const { searchValue, ageRating, genre, rating } = searchParams;
         return axios.get(FILMS_PATH, {
-            params: {
-                page,
-                limit,
-                genre,
-                rating,
-                name: searchValue,
-                age: ageRating,
-            },
+            params: FilmDto(searchParams, limit, page),
         });
     }
 

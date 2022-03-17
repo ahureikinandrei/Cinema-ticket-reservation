@@ -6,10 +6,10 @@ const Categories: FC = () => {
     return (
         <div className={style.wrapper}>
             <div className={style.title}>
-                <p className="text-light">Categories</p>
+                <p className="text-light">Search category</p>
             </div>
             <div className={style.items}>
-                <p className="text-light">Search category</p> <CategoriesForm />
+                <CategoriesForm />
             </div>
         </div>
     );

@@ -5,22 +5,22 @@ import { Model, ObjectId } from 'mongoose';
 import { FilmDto } from './dto/film.dto';
 import { FilesService } from '../files/files.service';
 import { QueryParams } from './dto/queryParams.dto';
+import { SessionsService } from '../sessions/sessions.service';
 
 @Injectable()
 export class FilmsService {
   constructor(
     @InjectModel(Film.name) private filmModel: Model<FilmDocument>,
     private filesService: FilesService,
+    private sessionService: SessionsService,
   ) {}
 
   async addFilm(dto: FilmDto, image) {
     const fileName = await this.filesService.createFile(image);
-    const film = await this.filmModel.create({
+    return await this.filmModel.create({
       ...dto,
       img: fileName,
     });
-
-    return film;
   }
 
   async getById(id: ObjectId) {
@@ -28,8 +28,23 @@ export class FilmsService {
   }
 
   async getFilms(queryParams: QueryParams) {
-    const { name, page = 1, limit, age, genre, rating } = queryParams;
+    const {
+      name,
+      page = 1,
+      limit,
+      age,
+      genre,
+      rating,
+      city,
+      cinema,
+    } = queryParams;
     const options = {};
+
+    if (cinema || city) {
+      const arrayFilmsID =
+        await this.sessionService.getFilmsIDFromSessionByCity(city, cinema);
+      Object.assign(options, { _id: { $in: arrayFilmsID } });
+    }
 
     if (name) {
       Object.assign(options, { name: new RegExp(name, 'i') });

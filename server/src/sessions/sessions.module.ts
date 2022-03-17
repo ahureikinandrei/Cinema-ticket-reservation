@@ -17,5 +17,6 @@ import { AuthModule } from '../auth/auth.module';
   ],
   controllers: [SessionsController],
   providers: [SessionsService],
+  exports: [SessionsService],
 })
 export class SessionsModule {}

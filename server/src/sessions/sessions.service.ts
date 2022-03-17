@@ -31,4 +31,24 @@ export class SessionsService {
   getSessionByFilmId(id: ObjectId) {
     return this.sessionModel.find({ film: id }).populate('cinema');
   }
+
+  async getFilmsIDFromSessionByCity(city = '', cinema = '') {
+    const result = [];
+    const sessions = await this.sessionModel.find().populate({
+      path: 'cinema',
+      match: {
+        city: new RegExp(city, 'i'),
+        name: new RegExp(cinema, 'i'),
+      },
+    });
+
+    sessions.forEach(({ cinema, film }) => {
+      if (cinema !== null) {
+        result.push(film);
+      }
+      return cinema !== null;
+    });
+
+    return result;
+  }
 }

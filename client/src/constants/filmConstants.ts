@@ -10,7 +10,9 @@ export const GENRES = [
     'romance',
 ];
 
-export const SEAT_TYPES: Array<'simple' | 'love' | 'prime' | 'empty'> = [
+export type seatTypes = 'simple' | 'love' | 'prime' | 'empty';
+
+export const SEAT_TYPES: Array<seatTypes> = [
     'simple',
     'love',
     'prime',

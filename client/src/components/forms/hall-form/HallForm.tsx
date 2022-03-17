@@ -1,17 +1,21 @@
 import React, { ChangeEvent, FC, FormEvent, useRef, useState } from 'react';
 import { Button, ButtonGroup, Dropdown, Form } from 'react-bootstrap';
-import { SEAT_TYPES } from '../../../constants/filmConstants';
+import { SEAT_TYPES, seatTypes } from '../../../constants/filmConstants';
 import { SeatModel } from '../../../models/SeatModel';
 import HallGreed from '../../hall/hall-greed/HallGreed';
 import { ICreateSeat } from '../../../services/types';
 import HallService from '../../../services/hall.service';
 import style from './hallForm.module.scss';
 
-const HallForm: FC = () => {
+interface IHallFormProps {
+    nextStep: () => void;
+}
+
+const HallForm: FC<IHallFormProps> = ({ nextStep }) => {
     const greedData = useRef(1);
     const [error, setError] = useState('');
     const [greed, setGreed] = useState<Array<ICreateSeat[]>>([]);
-    const [seatType, setSeatType] = useState<string>(SEAT_TYPES[0]);
+    const [seatType, setSeatType] = useState<seatTypes>(SEAT_TYPES[0]);
     const [row, setRow] = useState<number>(1);
     const [seatNumber, setSeatNumber] = useState<number>(1);
     const [name, setName] = useState<string>('');
@@ -133,20 +137,29 @@ const HallForm: FC = () => {
                     <Button
                         type="button"
                         variant="outline-light"
-                        onClick={addSeat}
-                    >
-                        Add
-                    </Button>
-                    <Button
-                        type="button"
-                        variant="outline-light"
                         onClick={addGreed}
                     >
                         Greed
                     </Button>
-                    <Button type="submit" variant="outline-light">
-                        Create
+                    <Button
+                        type="button"
+                        variant="outline-light"
+                        onClick={addSeat}
+                    >
+                        Add
                     </Button>
+                    <ButtonGroup>
+                        <Button type="submit" variant="outline-light">
+                            Create
+                        </Button>
+                        <Button
+                            type="button"
+                            variant="outline-light"
+                            onClick={nextStep}
+                        >
+                            Next
+                        </Button>
+                    </ButtonGroup>
                 </ButtonGroup>
             </Form>
             <HallGreed greed={greed} greedWidth={greedData.current} />

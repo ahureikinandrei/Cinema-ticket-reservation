@@ -1,4 +1,4 @@
-.content {
+.wrapper {
   display: flex;
   max-width: 1024px;
   width: 100%;
@@ -11,7 +11,7 @@
   background-image: url(../../assets/images/rows-of-red-seats.jpg);
 }
 
-.wrapper {
+.content {
   display: flex;
   flex-grow: 1;
   flex-direction: column;

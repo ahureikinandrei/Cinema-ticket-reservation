@@ -9,6 +9,9 @@ interface ISessionListProps {
 }
 
 const SessionList: FC<ISessionListProps> = ({ sessions }) => {
+    if (!sessions || sessions.length === 0) {
+        return <div className={style.session__error}>Coming Soon</div>;
+    }
     return (
         <Row xs={2} md={4} lg={5} className="w-100">
             {sessions.map((session) => {

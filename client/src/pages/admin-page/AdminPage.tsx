@@ -7,9 +7,12 @@ import CinemaForm from '../../components/forms/cinema-form/CinemaForm';
 import SessionForm from '../../components/forms/session-form/SessionForm';
 import style from './adminPage.module.scss';
 import HallForm from '../../components/forms/hall-form/HallForm';
+import StepProgress from '../../components/progress/step-progree/StepProgress';
+
+const labelArray = ['Film', 'Cinema', 'Hall', 'Session'];
 
 const AdminPage: FC = () => {
-    const [key, setKey] = useState('film');
+    const [key, setKey] = useState('Film');
 
     const selectTab = (k: string | null): void => {
         if (k) {
@@ -17,31 +20,39 @@ const AdminPage: FC = () => {
         }
     };
 
+    const nextStep = (): void => {
+        const keyIndex = labelArray.indexOf(key);
+        setKey(labelArray[keyIndex + 1]);
+    };
+
     return (
-        <main className={style.content}>
-            <Container className="d-flex flex-grow-1 justify-content-center">
-                <div className={style.wrapper}>
-                    <Tabs
-                        id="controlled-tab-example"
-                        activeKey={key}
-                        onSelect={selectTab}
-                    >
-                        <Tab eventKey="film" title="Film">
-                            <FilmForm />
-                        </Tab>
-                        <Tab eventKey="cinema" title="Cinema">
-                            <CinemaForm />
-                        </Tab>
-                        <Tab eventKey="session" title="Session">
-                            <SessionForm />
-                        </Tab>
-                        <Tab eventKey="hall" title="Hall">
-                            <HallForm />
-                        </Tab>
-                    </Tabs>
-                </div>
-            </Container>
-        </main>
+        <Container as="main" className={style.content}>
+            <StepProgress
+                stepKey={key}
+                setStepKey={setKey}
+                labelArray={labelArray}
+            />
+            <div className={style.wrapper}>
+                <Tabs
+                    id="controlled-tab-example"
+                    activeKey={key}
+                    onSelect={selectTab}
+                >
+                    <Tab eventKey="Film" title="Film">
+                        <FilmForm nextStep={nextStep} />
+                    </Tab>
+                    <Tab eventKey="Cinema" title="Cinema">
+                        <CinemaForm nextStep={nextStep} />
+                    </Tab>
+                    <Tab eventKey="Hall" title="Hall">
+                        <HallForm nextStep={nextStep} />
+                    </Tab>
+                    <Tab eventKey="Session" title="Session">
+                        <SessionForm />
+                    </Tab>
+                </Tabs>
+            </div>
+        </Container>
     );
 };
 

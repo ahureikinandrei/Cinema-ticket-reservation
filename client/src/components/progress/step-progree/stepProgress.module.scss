@@ -1,0 +1,69 @@
+@import "../../../sass/variables";
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  padding: 10px 0;
+  z-index: 10;
+}
+
+.stepWrapper {
+  display: flex;
+}
+
+.progress__circle {
+  width: 29px;
+  height: 29px;
+  line-height: 25px;
+  background-color: $color_gray;
+  color: $color-text;
+  border-radius: 50%;
+  border: 2px solid $color_border_main;
+  cursor: pointer;
+}
+
+.progress__step {
+  &_selected .progress__circle {
+    background-color: $seat_bought;
+    border-color: $color_border_main;
+    box-shadow: 0 0 10px 3px $color_border_main;
+  }
+}
+
+.progress__circleWrapper {
+  position: relative;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.progress__step:not(:last-child) > .progress__circleWrapper:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  top: 0;
+  bottom: 0;
+  background-color: $seat_reserved;
+  margin: auto;
+  z-index: -1;
+}
+
+.progress__step:not(:last-child) > .progress__circleWrapper:after {
+  height: 6px;
+  background-color: $color_border_main;
+}
+
+.progress__step.progress__step_selected > .progress__circleWrapper *,
+.progress__step.progress__step_selected ~ .progress__step > .progress__circleWrapper * {
+  //background-color: $seat_reserved;
+  background-color: $seat_bought;
+}
+
+.progress__step:not(:last-child).progress__step_selected > .progress__circleWrapper:after,
+.progress__step:not(:last-child).progress__step_selected ~ .progress__step:not(:last-child) > .progress__circleWrapper:after {
+  height: 4px;
+  background-color: $seat_reserved;
+}
+
+

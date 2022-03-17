@@ -1,6 +1,6 @@
 import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from '../store';
-import { IOrder } from '../../services/types';
+import { IOrderResponse } from '../../services/types';
 
 const selectSelf = (state: RootState): RootState => state;
 
@@ -11,7 +11,7 @@ export const getIsUserAdmin = (state: RootState): boolean => {
 
 export const getUserOrders = createSelector(
     selectSelf,
-    (state: RootState): IOrder[] => {
+    (state: RootState): IOrderResponse[] => {
         if (state.users.user === null) {
             return [];
         }
@@ -32,8 +32,9 @@ export const getUserID = createSelector(
 export const getUserEmail = (state: RootState): string | null =>
     state.users.user?.email || null;
 
-export const getUserErrorMessage = (state: RootState): string | null =>
-    state.users.error;
+export const getUserErrorMessage = (state: RootState): string | null => {
+    return state.users.error;
+};
 
 export const getIsUserLoading = (state: RootState): boolean =>
     state.users.isLoading;

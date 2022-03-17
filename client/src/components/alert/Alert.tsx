@@ -1,26 +1,15 @@
 import React, { FC } from 'react';
 import ToastContainer from 'react-bootstrap/ToastContainer';
 import Toast from 'react-bootstrap/Toast';
-import { useAction, useAppSelector } from '../../hooks/redux';
-import { getUserErrorMessage } from '../../redux/users/selectors';
+import { useAlert } from './useAlert';
 
 const Alert: FC = () => {
-    const errorMessage = useAppSelector(getUserErrorMessage);
-    const { setUserErrorMessage } = useAction();
-
-    const onClose = (): void => {
-        setUserErrorMessage('');
-    };
+    const [show, message, onClose] = useAlert();
 
     return (
-        <ToastContainer position="bottom-start">
-            <Toast
-                onClose={onClose}
-                show={!!errorMessage}
-                delay={3000}
-                autohide
-            >
-                <Toast.Body>{errorMessage}</Toast.Body>
+        <ToastContainer position="bottom-start" className="mb-3">
+            <Toast onClose={onClose} show={show} delay={3000} autohide>
+                <Toast.Body>{message}</Toast.Body>
             </Toast>
         </ToastContainer>
     );

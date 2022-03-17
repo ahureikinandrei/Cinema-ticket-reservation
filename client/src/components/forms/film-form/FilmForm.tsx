@@ -1,44 +1,43 @@
 import React, { FC, useState, ChangeEvent, FormEvent } from 'react';
-import { Form, Dropdown, Button } from 'react-bootstrap';
+import { Form, Dropdown, Button, ButtonGroup } from 'react-bootstrap';
 import { GENRES } from '../../../constants/filmConstants';
 import FilmService from '../../../services/film.service';
 import { useAction } from '../../../hooks/redux';
+import { Action } from './reducer';
 import style from './createFilmForm.module.scss';
+import { useFilmReducer } from './useFilmReducer';
 
-const FilmForm: FC = () => {
-    const [name, setName] = useState('');
-    const [description, setDescription] = useState('');
-    const [selectedGenre, setGenre] = useState('Add genre');
-    const [age, setAge] = useState('');
-    const [startDate, setStartDate] = useState('');
-    const [endDate, setEndDate] = useState('');
+interface IFilmFormProps {
+    nextStep: () => void;
+}
+
+const FilmForm: FC<IFilmFormProps> = ({ nextStep }) => {
     const [file, setFile] = useState<string | Blob>('');
-    const [rating, setRating] = useState<string>('');
-
+    const [state, customDispatch] = useFilmReducer();
     const { setAppMessage } = useAction();
 
     const addName = (event: ChangeEvent<HTMLInputElement>): void => {
-        setName(event.target.value);
+        customDispatch(Action.NAME, event.target.value);
     };
 
     const addDescription = (event: ChangeEvent<HTMLInputElement>): void => {
-        setDescription(event.target.value);
+        customDispatch(Action.DESCRIPTION, event.target.value);
     };
 
     const addAge = (event: ChangeEvent<HTMLInputElement>): void => {
-        setAge(event.target.value);
+        customDispatch(Action.AGE, event.target.value);
     };
 
     const addStartDate = (event: ChangeEvent<HTMLInputElement>): void => {
-        setStartDate(event.target.value);
+        customDispatch(Action.START_DATE, event.target.value);
     };
 
     const addEndDate = (event: ChangeEvent<HTMLInputElement>): void => {
-        setEndDate(event.target.value);
+        customDispatch(Action.END_DATE, event.target.value);
     };
 
     const addRating = (event: ChangeEvent<HTMLInputElement>): void => {
-        setRating(event.target.value);
+        customDispatch(Action.RATING, event.target.value);
     };
 
     const selectFile = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -51,25 +50,24 @@ const FilmForm: FC = () => {
 
     const createFilm = async (event: FormEvent): Promise<void> => {
         event.preventDefault();
+
+        if (!file) {
+            return;
+        }
         const formData = new FormData();
-        formData.append('name', name);
-        formData.append('description', description);
-        formData.append('genre', selectedGenre);
-        formData.append('age', age);
+        formData.append('name', state.name);
+        formData.append('description', state.description);
+        formData.append('genre', state.selectedGenre);
+        formData.append('age', state.age);
         formData.append('img', file);
-        formData.append('startDate', startDate);
-        formData.append('endDate', endDate);
-        formData.append('rating', rating);
+        formData.append('startDate', state.startDate);
+        formData.append('endDate', state.endDate);
+        formData.append('rating', state.rating);
         const errorMessage = await FilmService.createFilm(formData);
 
         if (!errorMessage) {
             setAppMessage('Film has been created');
-            setName('');
-            setDescription('');
-            setGenre('');
-            setStartDate('');
-            setEndDate('');
-            setRating('');
+            customDispatch(Action.DEFAULT);
             return;
         }
         setAppMessage(errorMessage);
@@ -78,14 +76,14 @@ const FilmForm: FC = () => {
     return (
         <Form onSubmit={createFilm}>
             <Form.Control
-                value={name}
+                value={state.name}
                 onChange={addName}
                 className="mt-3"
                 placeholder="Name"
                 required
             />
             <Form.Control
-                value={description}
+                value={state.description}
                 onChange={addDescription}
                 className="mt-3"
                 placeholder="Description"
@@ -103,12 +101,12 @@ const FilmForm: FC = () => {
             </label>
             <Dropdown className="mt-2 mb-2">
                 <Dropdown.Toggle variant="secondary" size="sm">
-                    {selectedGenre || 'Add genre'}
+                    {state.selectedGenre || 'Add genre'}
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                     {GENRES.map((genre) => (
                         <Dropdown.Item
-                            onClick={() => setGenre(genre)}
+                            // onClick={() => setGenre(genre)}
                             key={genre}
                         >
                             {genre}
@@ -117,37 +115,52 @@ const FilmForm: FC = () => {
                 </Dropdown.Menu>
             </Dropdown>
             <Form.Control
-                value={age}
+                value={state.age}
                 type="number"
                 onChange={addAge}
                 className="mt-3"
                 placeholder="Age"
                 required
             />
+            <Form.Group className="mt-1">
+                <Form.Label>Start date</Form.Label>
+                <Form.Control
+                    type="date"
+                    value={state.startDate}
+                    onChange={addStartDate}
+                    max={state.endDate}
+                    required
+                />
+            </Form.Group>
+            <Form.Group className="mt-1">
+                <Form.Label>End date</Form.Label>
+                <Form.Control
+                    type="date"
+                    value={state.endDate}
+                    onChange={addEndDate}
+                    min={state.startDate}
+                    required
+                />
+            </Form.Group>
             <Form.Control
-                type="date"
-                value={startDate}
-                onChange={addStartDate}
-                className="mt-3"
-                required
-            />
-            <Form.Control
-                type="date"
-                value={endDate}
-                onChange={addEndDate}
-                className="mt-3"
-                required
-            />
-            <Form.Control
-                value={rating}
+                value={state.rating}
                 onChange={addRating}
                 className="mt-3"
                 placeholder="Rating"
                 required
             />
-            <Button type="submit" variant="outline-light mt-3">
-                Create
-            </Button>
+            <ButtonGroup>
+                <Button type="submit" variant="outline-light mt-3">
+                    Create
+                </Button>
+                <Button
+                    type="button"
+                    variant="outline-light mt-3"
+                    onClick={nextStep}
+                >
+                    Next
+                </Button>
+            </ButtonGroup>
         </Form>
     );
 };

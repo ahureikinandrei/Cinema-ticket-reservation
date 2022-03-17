@@ -1,9 +1,13 @@
 import React, { FC, useState, ChangeEvent, FormEvent } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, ButtonGroup } from 'react-bootstrap';
 import { useAction } from '../../../hooks/redux';
 import CinemaService from '../../../services/cinema.service';
 
-const CinemaForm: FC = () => {
+interface ICinemaFormProps {
+    nextStep: () => void;
+}
+
+const CinemaForm: FC<ICinemaFormProps> = ({ nextStep }) => {
     const [name, setName] = useState('');
     const [city, setCity] = useState('');
 
@@ -49,9 +53,18 @@ const CinemaForm: FC = () => {
                 placeholder="City"
                 required
             />
-            <Button type="submit" variant="outline-light mt-3">
-                Create
-            </Button>
+            <ButtonGroup>
+                <Button type="submit" variant="outline-light mt-3">
+                    Create
+                </Button>
+                <Button
+                    type="button"
+                    variant="outline-light mt-3"
+                    onClick={nextStep}
+                >
+                    Next
+                </Button>
+            </ButtonGroup>
         </Form>
     );
 };

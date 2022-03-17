@@ -3,14 +3,14 @@ import { Container, Row, Col } from 'react-bootstrap';
 import SearchInput from '../../components/search/search-input/SearchInput';
 import Categories from '../../components/categories/Categories';
 import Films from '../../components/films/Films';
+import Pages from '../../components/pagination/Pages';
 import FilmService from '../../services/film.service';
 import { IFilm } from '../../services/types';
-import Pages from '../../components/pagination/Pages';
+import { useAppSelector } from '../../hooks/redux';
+import { getSearchParams } from '../../redux/search-films/selectors';
 import { NO_RESULT, UNEXPECTED_ERROR } from '../../constants/messages';
 import { FILMS_ON_PAGE } from '../../constants/filmConstants';
 import style from './filmsPage.module.scss';
-import { useAppSelector } from '../../hooks/redux';
-import { getSearchParams } from '../../redux/search-films/selectors';
 
 const FilmsPage: FC = () => {
     const [films, setFilms] = useState<IFilm[]>([]);
@@ -47,31 +47,27 @@ const FilmsPage: FC = () => {
     }, [searchParams, page]);
 
     return (
-        <main className={style.content}>
-            <Container className={style.wrapper}>
-                <Row className="d-flex flex-column flex-grow-1">
-                    <Row className="d-flex justify-content-center">
-                        <SearchInput />
-                    </Row>
-                    <Row className="flex-grow-1">
-                        <Col md={3}>
-                            <Categories />
-                        </Col>
-                        <Col md={9} className="d-flex flex-column text-light">
-                            {error || (
-                                <>
-                                    <Films films={films} />
-                                    <Row>
-                                        <Pages
-                                            filmsCount={totalPages}
-                                            currentPage={page}
-                                            setPage={setPage}
-                                        />
-                                    </Row>
-                                </>
-                            )}
-                        </Col>
-                    </Row>
+        <main className={style.wrapper}>
+            <Container className={style.content}>
+                <Row className="d-flex justify-content-center">
+                    <SearchInput />
+                </Row>
+                <Row>
+                    <Col md={3}>
+                        <Categories />
+                    </Col>
+                    <Col md={9} className="d-flex flex-column text-light">
+                        {error || (
+                            <>
+                                <Films films={films} />
+                                <Pages
+                                    filmsCount={totalPages}
+                                    currentPage={page}
+                                    setPage={setPage}
+                                />
+                            </>
+                        )}
+                    </Col>
                 </Row>
             </Container>
         </main>

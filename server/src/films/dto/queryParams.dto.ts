@@ -7,4 +7,5 @@ export class QueryParams {
   readonly age: number;
   readonly genre: string;
   readonly rating: number;
+  readonly date: string;
 }

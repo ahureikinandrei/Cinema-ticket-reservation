@@ -7,6 +7,7 @@ export interface ISearchState {
     genre: string;
     city: string;
     cinema: string;
+    date: string;
 }
 
 const initialState: ISearchState = {
@@ -16,6 +17,7 @@ const initialState: ISearchState = {
     rating: 0,
     city: '',
     cinema: '',
+    date: '',
 };
 
 const searchFilmSlice = createSlice({
@@ -39,6 +41,9 @@ const searchFilmSlice = createSlice({
         },
         setCinema(state, action: PayloadAction<string>) {
             state.cinema = action.payload;
+        },
+        setDate(state, action: PayloadAction<string>) {
+            state.date = action.payload;
         },
     },
 });

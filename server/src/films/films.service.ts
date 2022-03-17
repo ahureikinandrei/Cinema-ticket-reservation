@@ -37,12 +37,16 @@ export class FilmsService {
       rating,
       city,
       cinema,
+      date,
     } = queryParams;
     const options = {};
 
-    if (cinema || city) {
-      const arrayFilmsID =
-        await this.sessionService.getFilmsIDFromSessionByCity(city, cinema);
+    if (cinema || city || date) {
+      const arrayFilmsID = await this.sessionService.getFilmsIDFromSession(
+        city,
+        cinema,
+        date,
+      );
       Object.assign(options, { _id: { $in: arrayFilmsID } });
     }
 

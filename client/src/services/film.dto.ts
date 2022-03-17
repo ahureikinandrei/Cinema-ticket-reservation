@@ -9,6 +9,7 @@ interface IFilmQueryParams {
     age: number;
     genre: string;
     rating: number;
+    date: string;
 }
 
 export const FilmDto = (
@@ -16,12 +17,13 @@ export const FilmDto = (
     limit: number,
     page: number
 ): IFilmQueryParams => {
-    const { searchValue, ageRating, genre, rating, city, cinema } =
+    const { searchValue, ageRating, genre, rating, city, cinema, date } =
         searchParams;
 
     return {
         city,
         cinema,
+        date,
         page,
         limit,
         genre,

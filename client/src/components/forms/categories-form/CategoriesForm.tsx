@@ -10,7 +10,8 @@ const CategoriesForm: FC = () => {
     const [selectedRating, setRatingState] = useState(0);
     const [selectedCity, setCityState] = useState('');
     const [selectedCinema, setCinemaState] = useState('');
-    const { setGenre, setRating, setCity, setCinema } = useAction();
+    const [selectedFilmDate, setFilmDateState] = useState('');
+    const { setGenre, setRating, setCity, setCinema, setDate } = useAction();
 
     const onCategoriesChange = (event: FormEvent): void => {
         event.preventDefault();
@@ -18,6 +19,7 @@ const CategoriesForm: FC = () => {
         setCity(selectedCity.trim());
         setRating(selectedRating);
         setCinema(selectedCinema.trim());
+        setDate(selectedFilmDate);
 
         const genre = selectedGenre === ANY_GENRE ? '' : selectedGenre;
         setGenre(genre);
@@ -35,6 +37,10 @@ const CategoriesForm: FC = () => {
         setCinemaState(event.target.value);
     };
 
+    const changeDate = (event: ChangeEvent<HTMLInputElement>): void => {
+        setFilmDateState(event.target.value);
+    };
+
     return (
         <Form onSubmit={onCategoriesChange}>
             <Form.Group className={style.category__item}>
@@ -44,6 +50,14 @@ const CategoriesForm: FC = () => {
             <Form.Group className={style.category__item}>
                 <Form.Label>Cinema</Form.Label>
                 <Form.Control value={selectedCinema} onChange={changeCinema} />
+            </Form.Group>
+            <Form.Group className="mt-1">
+                <Form.Label>Date</Form.Label>
+                <Form.Control
+                    type="date"
+                    value={selectedFilmDate}
+                    onChange={changeDate}
+                />
             </Form.Group>
             <Form.Label className={style.category__item}>Genre</Form.Label>
             <Dropdown>

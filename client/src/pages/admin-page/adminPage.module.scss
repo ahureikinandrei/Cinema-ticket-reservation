@@ -2,7 +2,6 @@
   max-width: 1024px;
   width: 100%;
   display: flex;
-  flex: 1 0 0;
   flex-direction: column;
   justify-content: center;
   box-sizing: border-box;
@@ -21,4 +20,14 @@
   display: none;
   width: 100%;
   max-width: 600px;
+}
+
+.tabs {
+  flex-wrap: nowrap !important;
+}
+
+.tab__content {
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
 }

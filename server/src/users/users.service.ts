@@ -75,4 +75,12 @@ export class UsersService {
 
     return user;
   }
+
+  async clearOrder(userID: mongoose.Schema.Types.ObjectId) {
+    const user = await this.userModel.findById(userID);
+    user.orders = [];
+    await user.save();
+
+    return user;
+  }
 }

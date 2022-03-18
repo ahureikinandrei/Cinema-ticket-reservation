@@ -32,11 +32,12 @@ const AdminPage: FC = () => {
                 setStepKey={setKey}
                 labelArray={labelArray}
             />
-            <div className={style.wrapper}>
+            <div className={style.tab__content}>
                 <Tabs
                     id="controlled-tab-example"
                     activeKey={key}
                     onSelect={selectTab}
+                    className={style.tabs}
                 >
                     <Tab eventKey="Film" title="Film">
                         <FilmForm nextStep={nextStep} />

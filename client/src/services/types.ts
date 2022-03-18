@@ -49,6 +49,7 @@ export interface ICreateSessionData {
     film: string;
     cinema: string;
     price: string;
+    freeSeats: number;
 }
 
 export interface ISeat {

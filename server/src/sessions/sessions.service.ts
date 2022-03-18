@@ -32,10 +32,18 @@ export class SessionsService {
     return this.sessionModel.find({ film: id }).populate('cinema');
   }
 
-  async getFilmsIDFromSession(city = '', cinema = '', date = '') {
+  async getFilmsIDFromSession(
+    city = '',
+    cinema = '',
+    date = '',
+    freeSeats = 0,
+  ) {
     const result = [];
     const sessions = await this.sessionModel
-      .find({ date: new RegExp(date, 'i') })
+      .find({
+        date: new RegExp(date, 'i'),
+        freeSeats: { $gte: freeSeats },
+      })
       .populate({
         path: 'cinema',
         match: {
@@ -52,5 +60,17 @@ export class SessionsService {
     });
 
     return result;
+  }
+
+  updateSessionFreeSeats(id: ObjectId, selectedSeats: number) {
+    return this.sessionModel
+      .findByIdAndUpdate(id, {
+        $inc: {
+          freeSeats: -selectedSeats,
+        },
+      })
+      .populate('film')
+      .populate('cinema')
+      .populate('price');
   }
 }

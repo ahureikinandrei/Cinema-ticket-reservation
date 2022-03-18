@@ -1,0 +1,17 @@
+.dropdown__button {
+  display: flex;
+  flex-grow: 1;
+  width: 100%;
+  text-align: left;
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dropdown__text {
+  display: inline;
+  width: 100%;
+  overflow: hidden;
+  margin: 0;
+  text-overflow: ellipsis;
+}

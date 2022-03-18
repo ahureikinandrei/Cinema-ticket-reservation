@@ -16,6 +16,9 @@ export class Session {
   @Prop()
   time: string;
 
+  @Prop()
+  freeSeats: number;
+
   @Prop({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Film',

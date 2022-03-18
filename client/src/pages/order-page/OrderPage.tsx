@@ -39,8 +39,12 @@ const OrderPage: FC = () => {
         if (!sessionId) {
             return;
         }
+
         setLoading(true);
-        const session = await SessionService.getSessionById(sessionId);
+        const session = await SessionService.getSessionByIdAndUpdate(
+            sessionId,
+            selectedSeats.length
+        );
 
         const order = await OrderService.createOrder(
             selectedSeats,

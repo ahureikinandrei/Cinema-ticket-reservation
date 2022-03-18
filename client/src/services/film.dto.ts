@@ -3,9 +3,10 @@ import { ISearchState } from '../redux/search-films/reducer';
 interface IFilmQueryParams {
     name: string;
     page: number;
+    limit: number;
+    freeSeats: number;
     city: string;
     cinema: string;
-    limit: number;
     age: number;
     genre: string;
     rating: number;
@@ -17,13 +18,22 @@ export const FilmDto = (
     limit: number,
     page: number
 ): IFilmQueryParams => {
-    const { searchValue, ageRating, genre, rating, city, cinema, date } =
-        searchParams;
+    const {
+        searchValue,
+        ageRating,
+        genre,
+        rating,
+        city,
+        cinema,
+        date,
+        freeSeats,
+    } = searchParams;
 
     return {
         city,
         cinema,
         date,
+        freeSeats,
         page,
         limit,
         genre,

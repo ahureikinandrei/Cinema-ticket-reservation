@@ -38,14 +38,16 @@ export class FilmsService {
       city,
       cinema,
       date,
+      freeSeats,
     } = queryParams;
     const options = {};
 
-    if (cinema || city || date) {
+    if (!!cinema || !!city || !!date || !!freeSeats) {
       const arrayFilmsID = await this.sessionService.getFilmsIDFromSession(
         city,
         cinema,
         date,
+        freeSeats,
       );
       Object.assign(options, { _id: { $in: arrayFilmsID } });
     }

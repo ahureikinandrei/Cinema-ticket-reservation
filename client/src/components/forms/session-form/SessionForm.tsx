@@ -10,6 +10,8 @@ import { getDateToISO, getTimeToISO } from '../../../utils/utils';
 import { UNEXPECTED_ERROR } from '../../../constants/messages';
 import HallService from '../../../services/hall.service';
 import PriceService from '../../../services/price.service';
+import { SeatsTypes } from '../../hall/seats-types';
+import style from './sessionForm.module.scss';
 
 const SessionForm: FC = () => {
     const { setAppMessage } = useAction();
@@ -41,6 +43,16 @@ const SessionForm: FC = () => {
             return;
         }
 
+        const freeSeats = selectedHall.schema.reduce<number>((seats, row) => {
+            let freeSeatsInRow = 0;
+            row.forEach((seat) => {
+                if (seat.type !== SeatsTypes.empty) {
+                    freeSeatsInRow += 1;
+                }
+            });
+            return seats + freeSeatsInRow;
+        }, 0);
+
         const priceDocumentId = await PriceService.createPrice({
             seatPrice: {
                 simple: simpleSeatPrice,
@@ -63,6 +75,7 @@ const SessionForm: FC = () => {
             cinema: selectedCinema._id,
             film: selectedFilm._id,
             price: priceDocumentId,
+            freeSeats,
         });
 
         if (errorMessage) {
@@ -119,8 +132,14 @@ const SessionForm: FC = () => {
     return (
         <Form onSubmit={createSession}>
             <Dropdown className="mt-2 mb-2">
-                <Dropdown.Toggle variant="secondary" size="sm">
-                    {selectedFilm?.name || 'Film'}
+                <Dropdown.Toggle
+                    variant="secondary"
+                    size="sm"
+                    className={style.dropdown__button}
+                >
+                    <p className={style.dropdown__text}>
+                        {selectedFilm?.name || 'Film'}
+                    </p>
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                     {films.map((film) => (
@@ -134,8 +153,14 @@ const SessionForm: FC = () => {
                 </Dropdown.Menu>
             </Dropdown>
             <Dropdown className="mt-2 mb-2">
-                <Dropdown.Toggle variant="secondary" size="sm">
-                    {selectedCinema?.name || 'Cinema'}
+                <Dropdown.Toggle
+                    variant="secondary"
+                    size="sm"
+                    className={style.dropdown__button}
+                >
+                    <p className={style.dropdown__text}>
+                        {selectedCinema?.name || 'Cinema'}
+                    </p>
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                     {cinemas.map((cinema) => (
@@ -149,8 +174,14 @@ const SessionForm: FC = () => {
                 </Dropdown.Menu>
             </Dropdown>
             <Dropdown className="mt-2 mb-2">
-                <Dropdown.Toggle variant="secondary" size="sm">
-                    {selectedHall?.name || 'Hall'}
+                <Dropdown.Toggle
+                    variant="secondary"
+                    size="sm"
+                    className={style.dropdown__button}
+                >
+                    <p className={style.dropdown__text}>
+                        {selectedHall?.name || 'Hall'}
+                    </p>
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                     {halls.map((hall) => (

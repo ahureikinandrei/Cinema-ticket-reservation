@@ -6,6 +6,7 @@ import {
   UseGuards,
   UsePipes,
   Param,
+  Req,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -17,6 +18,7 @@ import { Roles } from './types/roles.enum';
 import { ValidationPipe } from '../pipes/validation.pipe';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { ObjectId } from 'mongoose';
+import { IReqWhitUser } from '../orders/types';
 
 @Controller('users')
 export class UsersController {
@@ -51,5 +53,12 @@ export class UsersController {
   @Post('/delete')
   delete(@Body() dto: DeleteUserDto) {
     return this.usersService.deleteUser(dto);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Post('/clear')
+  clearOrder(@Req() req: IReqWhitUser) {
+    const { id } = req.user;
+    return this.usersService.clearOrder(id);
   }
 }

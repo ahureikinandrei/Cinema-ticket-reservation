@@ -11,7 +11,9 @@ const CategoriesForm: FC = () => {
     const [selectedCity, setCityState] = useState('');
     const [selectedCinema, setCinemaState] = useState('');
     const [selectedFilmDate, setFilmDateState] = useState('');
-    const { setGenre, setRating, setCity, setCinema, setDate } = useAction();
+    const [selectedFreeSeats, setFreeSeatsState] = useState(0);
+    const { setGenre, setRating, setCity, setCinema, setDate, setFreeSeats } =
+        useAction();
 
     const onCategoriesChange = (event: FormEvent): void => {
         event.preventDefault();
@@ -20,6 +22,7 @@ const CategoriesForm: FC = () => {
         setRating(selectedRating);
         setCinema(selectedCinema.trim());
         setDate(selectedFilmDate);
+        setFreeSeats(selectedFreeSeats);
 
         const genre = selectedGenre === ANY_GENRE ? '' : selectedGenre;
         setGenre(genre);
@@ -41,6 +44,10 @@ const CategoriesForm: FC = () => {
         setFilmDateState(event.target.value);
     };
 
+    const changeFreeSeats = (event: ChangeEvent<HTMLInputElement>): void => {
+        setFreeSeatsState(+event.target.value);
+    };
+
     return (
         <Form onSubmit={onCategoriesChange}>
             <Form.Group className={style.category__item}>
@@ -51,12 +58,21 @@ const CategoriesForm: FC = () => {
                 <Form.Label>Cinema</Form.Label>
                 <Form.Control value={selectedCinema} onChange={changeCinema} />
             </Form.Group>
-            <Form.Group className="mt-1">
+            <Form.Group className={style.category__item}>
                 <Form.Label>Date</Form.Label>
                 <Form.Control
                     type="date"
                     value={selectedFilmDate}
                     onChange={changeDate}
+                />
+            </Form.Group>
+            <Form.Group className={style.category__item}>
+                <Form.Label>Free seats</Form.Label>
+                <Form.Control
+                    value={selectedFreeSeats}
+                    type="number"
+                    min={0}
+                    onChange={changeFreeSeats}
                 />
             </Form.Group>
             <Form.Label className={style.category__item}>Genre</Form.Label>
@@ -81,7 +97,6 @@ const CategoriesForm: FC = () => {
                     value={selectedRating}
                     type="number"
                     onChange={changeRating}
-                    required
                     min={0}
                     max={5}
                     step={0.1}

@@ -8,6 +8,7 @@ export interface ISearchState {
     city: string;
     cinema: string;
     date: string;
+    freeSeats: number;
 }
 
 const initialState: ISearchState = {
@@ -18,6 +19,7 @@ const initialState: ISearchState = {
     city: '',
     cinema: '',
     date: '',
+    freeSeats: 0,
 };
 
 const searchFilmSlice = createSlice({
@@ -44,6 +46,9 @@ const searchFilmSlice = createSlice({
         },
         setDate(state, action: PayloadAction<string>) {
             state.date = action.payload;
+        },
+        setFreeSeats(state, action: PayloadAction<number>) {
+            state.freeSeats = action.payload;
         },
     },
 });

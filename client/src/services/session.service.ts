@@ -4,6 +4,7 @@ import { UNEXPECTED_ERROR } from '../constants/messages';
 import {
     ALL_SESSIONS_PATH,
     CREATE_SESSION_PATH,
+    SESSION_UPDATE_PATH,
     SESSIONS_BY_FILM_PATH,
 } from '../constants/routes';
 import { ICreateSessionData, ISessionData } from './types';
@@ -31,6 +32,16 @@ export default class SessionService {
 
     static async getSessionById(id = ''): Promise<AxiosResponse<ISessionData>> {
         const response = await axios.get(ALL_SESSIONS_PATH + id);
+        return response;
+    }
+
+    static async getSessionByIdAndUpdate(
+        id = '',
+        selectedSeats = 0
+    ): Promise<AxiosResponse<ISessionData>> {
+        const response = await axios.post(SESSION_UPDATE_PATH + id, {
+            selectedSeats,
+        });
         return response;
     }
 

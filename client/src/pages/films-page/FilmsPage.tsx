@@ -11,6 +11,7 @@ import { getSearchParams } from '../../redux/search-films/selectors';
 import { NO_RESULT, UNEXPECTED_ERROR } from '../../constants/messages';
 import { FILMS_ON_PAGE } from '../../constants/filmConstants';
 import style from './filmsPage.module.scss';
+import OrderService from '../../services/order.service';
 
 const FilmsPage: FC = () => {
     const [films, setFilms] = useState<IFilm[]>([]);

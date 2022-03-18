@@ -10,11 +10,12 @@ import { CinemaModule } from './cinema/cinema.module';
 import { SessionsModule } from './sessions/sessions.module';
 import { HallModule } from './hall/hall.module';
 import { PricesModule } from './prices/prices.module';
+import { SeatsGateway } from './seats.gateway';
 import * as path from 'path';
 
 @Module({
   controllers: [],
-  providers: [],
+  providers: [SeatsGateway],
   imports: [
     ConfigModule.forRoot({
       envFilePath: '.env',

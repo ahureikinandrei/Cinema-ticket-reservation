@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Cinema, CinemaDocument } from '../cinema/schemas/cinema.schema';
+import { Cinema, CinemaDocument } from './schemas/cinema.schema';
 import { Model } from 'mongoose';
 import { CinemaDto } from './dto/cinema.dto';
 

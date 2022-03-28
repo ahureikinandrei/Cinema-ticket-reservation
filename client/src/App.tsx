@@ -12,13 +12,10 @@ import OrderPage from './pages/order-page/OrderPage';
 import ErrorPage from './pages/error-page/ErrorPage';
 import ProfilePage from './pages/profile-page/ProfilePage';
 import { AdminRouter } from './routes/AdminRoute';
-import UseSeatsSockets from './hooks/useSeatsSockets';
 import './App.scss';
 
 const App: FC = () => {
     const { authUser } = useAction();
-
-    UseSeatsSockets();
 
     useEffect(() => {
         const token = LocalStorageService.getTokenFromLocalStorage();

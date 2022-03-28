@@ -10,12 +10,12 @@ import { CinemaModule } from './cinema/cinema.module';
 import { SessionsModule } from './sessions/sessions.module';
 import { HallModule } from './hall/hall.module';
 import { PricesModule } from './prices/prices.module';
-import { SeatsGateway } from './seats.gateway';
+import { BookingGateway } from './gateways/booking.gateway';
+import { BookingModule } from './gateways/booking.module';
 import * as path from 'path';
 
 @Module({
   controllers: [],
-  providers: [SeatsGateway],
   imports: [
     ConfigModule.forRoot({
       envFilePath: '.env',
@@ -32,6 +32,7 @@ import * as path from 'path';
     SessionsModule,
     HallModule,
     PricesModule,
+    BookingModule,
   ],
 })
 export class AppModule {}

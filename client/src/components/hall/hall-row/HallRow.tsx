@@ -3,30 +3,34 @@ import { OverlayTrigger } from 'react-bootstrap';
 import { ISeat } from '../../../services/types';
 import { SeatsTypes, seatsTypes } from '../seats-types';
 import { Tooltip } from './Tooltip';
-import style from '../hall.module.scss';
 import { ISeatFullInfo } from '../../../redux/order/reducer';
+import style from '../hall.module.scss';
+import Seat from './Seat';
 
 const HallRow = (
     rowData: ISeat[],
     greedWidth: number,
     reserve: (seat: ISeatFullInfo, cansel: boolean) => void,
     reservedSeatsId: string[],
-    rowIndex: number
+    rowIndex: number,
+    bookedOtherUsersSeatsID: string[]
 ): ReactElement[] => {
-    const basis = 100 / greedWidth;
+    const seatSizeBasis = 100 / greedWidth;
     let seatIndex = 0;
 
     return rowData.map((seat, index) => {
         const { size, type, isBought, _id } = seat;
 
-        const reserved = reservedSeatsId.includes(_id);
+        const isReserved = reservedSeatsId.includes(_id);
+        const isReservedOtherUser = bookedOtherUsersSeatsID.includes(_id);
+
         const reserveSeat = (): void => {
             const fullSeatInfo = {
                 ...seat,
                 row: rowIndex,
                 seat: index + 1,
             };
-            reserve(fullSeatInfo, reserved);
+            reserve(fullSeatInfo, isReserved);
         };
 
         const showSeat = (): ReactElement => {
@@ -40,17 +44,12 @@ const HallRow = (
                     placement="top"
                     overlay={Tooltip(seatIndex, type, isBought)}
                 >
-                    {isBought ? (
-                        <div className={style.seat_bought}>
-                            {seatsTypes[type]}
-                        </div>
-                    ) : (
-                        <div
-                            className={reserved ? style.seat_reserved : null}
-                            onClick={reserveSeat}
-                        >
-                            {seatsTypes[type]}
-                        </div>
+                    {Seat(
+                        type,
+                        isBought,
+                        isReserved,
+                        isReservedOtherUser,
+                        reserveSeat
                     )}
                 </OverlayTrigger>
             );
@@ -60,7 +59,7 @@ const HallRow = (
             <div
                 key={index}
                 className={style.seat}
-                style={{ flexBasis: `${basis * size}%` }}
+                style={{ flexBasis: `${seatSizeBasis * size}%` }}
             >
                 {showSeat()}
             </div>

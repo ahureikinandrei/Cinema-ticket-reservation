@@ -35,7 +35,6 @@ const userSlice = createSlice({
             state.user = action.payload;
         },
         setUserErrorMessage(state, action: PayloadAction<string>) {
-            console.log(action.payload);
             state.error = action.payload;
         },
     },

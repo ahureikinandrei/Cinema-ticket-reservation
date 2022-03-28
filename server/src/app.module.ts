@@ -10,8 +10,8 @@ import { CinemaModule } from './cinema/cinema.module';
 import { SessionsModule } from './sessions/sessions.module';
 import { HallModule } from './hall/hall.module';
 import { PricesModule } from './prices/prices.module';
-import { BookingGateway } from './gateways/booking.gateway';
 import { BookingModule } from './gateways/booking.module';
+import { ScheduleModule } from '@nestjs/schedule';
 import * as path from 'path';
 
 @Module({
@@ -24,6 +24,7 @@ import * as path from 'path';
       rootPath: path.resolve(__dirname, '..', 'static'),
     }),
     MongooseModule.forRoot(process.env.MONGODB_DB_URI),
+    ScheduleModule.forRoot(),
     UsersModule,
     OrdersModule,
     AuthModule,

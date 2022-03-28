@@ -60,8 +60,8 @@ export class BookingService {
     });
   }
 
-  async getInfoByAllUserInRoom(session: string) {
-    return await this.bookedSeatModel.find({
+  getInfoByAllUserInRoom(session: string) {
+    return this.bookedSeatModel.find({
       sessionID: session,
     });
   }
@@ -85,6 +85,14 @@ export class BookingService {
     return otherUsers.reduce((prev, curr) => {
       return [...prev, ...curr.bookedSeats];
     }, []);
+  }
+
+  async clearBookingDatabaseDeadConnection(
+    currentConnectionsSocketsID: string[],
+  ) {
+    await this.bookedSeatModel.deleteMany({
+      socketID: { $nin: currentConnectionsSocketsID },
+    });
   }
 
   filterSeatsByClientId(

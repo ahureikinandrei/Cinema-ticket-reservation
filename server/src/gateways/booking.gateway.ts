@@ -9,12 +9,16 @@ import {
 import { Socket, Server } from 'socket.io';
 import { SeatsSocketEvents } from './types';
 import { BookingService } from './booking.service';
+import { Cron, SchedulerRegistry } from '@nestjs/schedule';
 
 @WebSocketGateway({ cors: true })
 export class BookingGateway
   implements OnGatewayConnection, OnGatewayDisconnect
 {
-  constructor(private bookingService: BookingService) {}
+  constructor(
+    private bookingService: BookingService,
+    private schedulerRegistry: SchedulerRegistry,
+  ) {}
 
   @WebSocketServer()
   server: Server;
@@ -122,5 +126,19 @@ export class BookingGateway
     );
 
     client.emit(SeatsSocketEvents.CONNECT, bookedSeat);
+  }
+
+  @Cron('0 0 * * * *')
+  async clearBookingDatabaseDeadConnection() {
+    const sockets = await this.server.fetchSockets();
+    const currentConnectionsSocketsID = sockets.map(({ id }) => {
+      if (id) {
+        return id;
+      }
+    });
+
+    this.bookingService.clearBookingDatabaseDeadConnection(
+      currentConnectionsSocketsID,
+    );
   }
 }

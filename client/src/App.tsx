@@ -13,6 +13,7 @@ import ErrorPage from './pages/error-page/ErrorPage';
 import ProfilePage from './pages/profile-page/ProfilePage';
 import { AdminRouter } from './routes/AdminRoute';
 import './App.scss';
+import { PrivateRouter } from './routes/PrivateRouter';
 
 const App: FC = () => {
     const { authUser } = useAction();
@@ -40,7 +41,14 @@ const App: FC = () => {
                         </AdminRouter>
                     }
                 />
-                <Route path="/profile/:id" element={<ProfilePage />} />
+                <Route
+                    path="/profile/:id"
+                    element={
+                        <PrivateRouter>
+                            <ProfilePage />
+                        </PrivateRouter>
+                    }
+                />
                 <Route path="*" element={<ErrorPage />} />
             </Routes>
             <Alert />

@@ -11,7 +11,7 @@ export const PrivateRouter: FC<PublicRouter> = ({ children }) => {
     const isAuth = useAppSelector(getIsUserAuth);
     const location = useLocation();
     if (!isAuth) {
-        return <Navigate to="/home" state={{ from: location }} />;
+        return <Navigate to="/" state={{ from: location }} />;
     }
 
     return children;
